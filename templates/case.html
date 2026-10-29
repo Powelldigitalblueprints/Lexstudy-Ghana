@@ -5,10 +5,26 @@
 <p class="badge">{{ case.kind }}</p>
 <h1>{{ case.title }}</h1>
 <p><strong>Subject:</strong> {{ case.subject }}</p>
+{% if case.citation %}<p><strong>Citation:</strong> {{ case.citation }}</p>{% endif %}
+{% if case.court %}<p><strong>Court:</strong> {{ case.court }}</p>{% endif %}
+{% if case.decided %}<p><strong>Decided:</strong> {{ case.decided }}</p>{% endif %}
+{% if current_user %}
+<form action="/bookmark/case/{{ case.slug }}" method="post">
+  <button type="submit">{% if bookmarked %}Remove bookmark{% else %}Bookmark this brief{% endif %}</button>
+</form>
+{% else %}
+<p><a href="/login">Log in</a> to bookmark this brief.</p>
+{% endif %}
 <h2>Facts</h2><p>{{ case.facts }}</p>
 <h2>Issue</h2><p>{{ case.issue }}</p>
 <h2>Rule</h2><p>{{ case.rule }}</p>
 <h2>Application</h2><p>{{ case.application }}</p>
 <h2>Conclusion</h2><p>{{ case.conclusion }}</p>
 <p><strong>Principle to remember:</strong> {{ case.principle }}</p>
+{% if case.sources %}
+<h2>Sources checked for this brief</h2>
+<ul>{% for s in case.sources %}<li>{{ s }}</li>{% endfor %}</ul>
+{% if case.source_link %}<p><a href="{{ case.source_link }}" target="_blank" rel="noopener">{{ case.source_link_label }}</a></p>{% endif %}
+<p><em>This brief is a summary, not the full judgment. If it conflicts with the reported judgment, the reported judgment prevails.</em></p>
+{% endif %}
 {% endblock %}

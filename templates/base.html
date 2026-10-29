@@ -3,6 +3,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1a3a5c">
+  <link rel="manifest" href="/manifest.json">
+  <link rel="icon" href="{{ url_for('static', filename='icon.svg') }}">
   <title>{% block title %}LexStudy Ghana{% endblock %}</title>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
 </head>
@@ -12,7 +15,16 @@
   <nav>
     <a href="/subjects">Subjects</a>
     <a href="/cases">Case briefs</a>
+    <a href="/quizzes">Quizzes</a>
+    <a href="/irac">IRAC trainer</a>
     <a href="/plans">Plans</a>
+    {% if current_user %}
+    <a href="/account">My account</a>
+    <a href="/logout">Log out</a>
+    {% else %}
+    <a href="/login">Log in</a>
+    <a href="/register">Register</a>
+    {% endif %}
   </nav>
   <form class="searchbar" action="/search" method="get">
     <input name="q" placeholder="Search notes and briefs…" value="{{ query|default('') }}">
@@ -20,11 +32,17 @@
   </form>
 </header>
 <main>
+  {% with messages = get_flashed_messages() %}
+  {% if messages %}<div class="flash">{% for m in messages %}<p>{{ m }}</p>{% endfor %}</div>{% endif %}
+  {% endwith %}
   {% block content %}{% endblock %}
 </main>
 <footer>
-  <p><strong>Study aid only, not legal advice.</strong> Practice briefs use hypothetical facts and are not reports of real judgments. Real case briefs must be verified against the authoritative judgment before publication.</p>
-  <p>LexStudy Ghana v0.1 · Working name · Independent of Powell Digital Blueprints.</p>
+  <p><strong>Study aid only, not legal advice.</strong> Practice briefs use hypothetical facts and are not reports of real judgments. Cited briefs are summaries — check the reported judgment before citing a case in court work.</p>
+  <p>LexStudy Ghana v0.2 · Working name · Independent of Powell Digital Blueprints. Payments are not yet connected.</p>
 </footer>
+<script>
+if ('serviceWorker' in navigator) { navigator.serviceWorker.register('/static/sw.js').catch(function(){}); }
+</script>
 </body>
 </html>

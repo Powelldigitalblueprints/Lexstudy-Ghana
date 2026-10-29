@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ scenario.title }} — IRAC trainer{% endblock %}
+{% block content %}
+<h1>{{ scenario.title }}</h1>
+<p>{{ scenario.subject }} · {{ scenario.kind }}</p>
+<p>{{ scenario.facts }}</p>
+<form method="post">
+  <p><label>Issue<br><textarea name="issue" rows="3" required></textarea></label></p>
+  <p><label>Rule<br><textarea name="rule" rows="3" required></textarea></label></p>
+  <p><label>Application<br><textarea name="application" rows="5" required></textarea></label></p>
+  <p><label>Conclusion<br><textarea name="conclusion" rows="3" required></textarea></label></p>
+  <button type="submit">Compare with model answer</button>
+</form>
+{% endblock %}

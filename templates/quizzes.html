@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Quizzes — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>Quizzes</h1>
+<p>Five questions each, with explanations. Log in and your score is saved to your account.</p>
+<div class="grid">
+{% for slug, q in quizzes.items() %}
+<a class="card" href="/quizzes/{{ slug }}"><h3>{{ q.title }}</h3><p>{{ q.subject }} · {{ q.questions|length }} questions</p></a>
+{% endfor %}
+</div>
+{% endblock %}

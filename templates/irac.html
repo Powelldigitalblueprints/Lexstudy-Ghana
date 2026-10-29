@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}IRAC trainer — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>IRAC trainer</h1>
+<p>Write your own Issue, Rule, Application and Conclusion, then compare with the model answer and the self-check list. Log in and your practice is saved.</p>
+<div class="grid">
+{% for slug, s in scenarios.items() %}
+<a class="card" href="/irac/{{ slug }}"><h3>{{ s.title }}</h3><p>{{ s.subject }} · {{ s.kind }}</p></a>
+{% endfor %}
+</div>
+{% endblock %}

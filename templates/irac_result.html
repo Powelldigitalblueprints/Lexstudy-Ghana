@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}IRAC result — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>{{ scenario.title }} — your answer vs the model</h1>
+<h2>Your answer</h2>
+<p><strong>Issue:</strong> {{ student.issue }}</p>
+<p><strong>Rule:</strong> {{ student.rule }}</p>
+<p><strong>Application:</strong> {{ student.application }}</p>
+<p><strong>Conclusion:</strong> {{ student.conclusion }}</p>
+<h2>Model answer</h2>
+<p><strong>Issue:</strong> {{ scenario.model_issue }}</p>
+<p><strong>Rule:</strong> {{ scenario.model_rule }}</p>
+<p><strong>Application:</strong> {{ scenario.model_application }}</p>
+<p><strong>Conclusion:</strong> {{ scenario.model_conclusion }}</p>
+<h2>Self-check</h2>
+<ul>{% for item in scenario.checklist %}<li>{{ item }}</li>{% endfor %}</ul>
+<p><a href="/irac">Back to IRAC trainer</a> · <a href="/account">My account</a></p>
+{% endblock %}

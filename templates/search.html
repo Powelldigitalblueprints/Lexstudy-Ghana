@@ -3,11 +3,12 @@
 {% block content %}
 <h1>Search{% if query %}: “{{ query }}”{% endif %}</h1>
 {% if not query %}
-<p>Use the search box above to find a subject, topic or practice brief.</p>
-{% elif not subjects and not cases %}
-<p>No matches yet in v0.1. Try “contract”, “negligence”, “constitution” or “trust”.</p>
+<p>Use the search box above to find a subject, topic, cited brief or practice brief.</p>
+{% elif not subjects and not cases and not verified %}
+<p>No matches yet. Try “contract”, “negligence”, “constitution”, “Tuffour” or “trust”.</p>
 {% else %}
 {% if subjects %}<h2>Subjects</h2><ul>{% for s in subjects %}<li><a href="/subjects/{{ s.slug }}">{{ s.name }}</a> — {{ s.description }}</li>{% endfor %}</ul>{% endif %}
+{% if verified %}<h2>Cited briefs</h2><ul>{% for c in verified %}<li><a href="/cases/{{ c.slug }}">{{ c.title }}</a> — {{ c.citation }}</li>{% endfor %}</ul>{% endif %}
 {% if cases %}<h2>Practice briefs</h2><ul>{% for c in cases %}<li><a href="/cases/{{ c.slug }}">{{ c.title }}</a> — {{ c.subject }}</li>{% endfor %}</ul>{% endif %}
 {% endif %}
 {% endblock %}

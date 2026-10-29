@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Quiz result — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>{{ quiz.title }} — result</h1>
+<p><strong>Score: {{ score }}/{{ total }}</strong></p>
+{% if not current_user %}<p><a href="/login">Log in</a> next time and your score will be saved to your account.</p>{% endif %}
+{% for r in results %}
+<article class="note">
+  <h3>{{ loop.index }}. {{ r.question.q }}</h3>
+  <p>{% if r.correct %}✓ Correct.{% else %}✗ Not quite.{% endif %} {{ r.question.explanation }}</p>
+  <p>Correct answer: {{ r.question.options[r.question.answer] }}</p>
+</article>
+{% endfor %}
+<p><a href="/quizzes">Back to quizzes</a> · <a href="/account">My account</a></p>
+{% endblock %}

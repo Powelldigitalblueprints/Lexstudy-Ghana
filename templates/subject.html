@@ -4,6 +4,13 @@
 <p><a href="/subjects">← All subjects</a></p>
 <h1>{{ subject.name }}</h1>
 <p class="lead">{{ subject.description }}</p>
+{% if current_user %}
+<form action="/bookmark/subject/{{ subject.slug }}" method="post">
+  <button type="submit">{% if bookmarked %}Remove bookmark{% else %}Bookmark this subject{% endif %}</button>
+</form>
+{% else %}
+<p><a href="/login">Log in</a> to bookmark this subject.</p>
+{% endif %}
 <h2>Topics</h2>
 <ul>{% for t in subject.topics %}<li>{{ t }}</li>{% endfor %}</ul>
 <h2>Study notes</h2>
@@ -15,7 +22,7 @@
 </article>
 {% endfor %}
 {% if related %}
-<h2>Practice briefs in this subject</h2>
-<ul>{% for c in related %}<li><a href="/cases/{{ c.slug }}">{{ c.title }}</a></li>{% endfor %}</ul>
+<h2>Briefs in this subject</h2>
+<ul>{% for c in related %}<li><a href="/cases/{{ c.slug }}">{{ c.title }}</a> — {{ c.kind }}</li>{% endfor %}</ul>
 {% endif %}
 {% endblock %}

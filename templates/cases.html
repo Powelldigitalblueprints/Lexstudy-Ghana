@@ -2,7 +2,19 @@
 {% block title %}Case briefs — LexStudy Ghana{% endblock %}
 {% block content %}
 <h1>Case briefs</h1>
-<p class="warning">These v0.1 briefs are practice briefs on hypothetical facts. They teach IRAC structure. They are not reports of real judgments and must not be cited as cases.</p>
+<h2>Cited briefs — real cases, with citations and sources</h2>
+<p>These are summaries, not full judgments. Check the reported judgment before citing a case in court work.</p>
+<div class="grid">
+  {% for c in verified %}
+  <a class="card" href="/cases/{{ c.slug }}">
+    <h3>{{ c.title }}</h3>
+    <p>{{ c.citation }}</p>
+    <span>{{ c.subject }}</span>
+  </a>
+  {% endfor %}
+</div>
+<h2>Practice briefs — hypothetical facts</h2>
+<p class="warning">These briefs teach IRAC structure. They are not reports of real judgments and must not be cited as cases.</p>
 <div class="grid">
   {% for c in cases %}
   <a class="card" href="/cases/{{ c.slug }}">

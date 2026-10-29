@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}My account — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>My account</h1>
+<p><strong>{{ user.name }}</strong> · {{ user.email }}</p>
+<h2>Bookmarks</h2>
+{% if bookmark_items %}
+<ul>{% for kind, title, url in bookmark_items %}<li>{{ kind }}: <a href="{{ url }}">{{ title }}</a></li>{% endfor %}</ul>
+{% else %}
+<p>No bookmarks yet. Open a subject or brief and bookmark it.</p>
+{% endif %}
+<h2>Quiz attempts</h2>
+{% if quiz_attempts %}
+<ul>{% for a in quiz_attempts %}<li>{{ quizzes[a.quiz_slug].title }} — {{ a.score }}/{{ a.total }} · {{ a.created_at }}</li>{% endfor %}</ul>
+{% else %}
+<p>No quiz attempts yet. <a href="/quizzes">Try a quiz</a>.</p>
+{% endif %}
+<h2>IRAC practice</h2>
+{% if irac_attempts %}
+<ul>{% for a in irac_attempts %}<li>{{ scenarios[a.scenario_slug].title }} · {{ a.created_at }}</li>{% endfor %}</ul>
+{% else %}
+<p>No IRAC practice yet. <a href="/irac">Try the IRAC trainer</a>.</p>
+{% endif %}
+{% endblock %}
