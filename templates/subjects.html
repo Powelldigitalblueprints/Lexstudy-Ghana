@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Subjects — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>Subjects</h1>
+<p>Notes organised by subject. Start with Legal System and Methods if you are new to reading judgments.</p>
+<div class="grid">
+  {% for s in subjects %}
+  <a class="card" href="/subjects/{{ s.slug }}">
+    <h3>{{ s.name }}</h3>
+    <p>{{ s.description }}</p>
+    <span>{{ s.level }} · {{ s.topics|length }} topics</span>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

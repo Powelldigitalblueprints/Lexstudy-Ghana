@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}LexStudy Ghana — Ghanaian legal studies, made clear{% endblock %}
+{% block content %}
+<section class="hero">
+  <h1>Ghanaian legal studies, made clear.</h1>
+  <p>Course notes and case briefs for law students and legal researchers in Ghana — structured by subject, built for revision, and honest about what is verified and what is not.</p>
+  <p><a class="btn" href="/subjects">Browse subjects</a> <a class="btn secondary" href="/cases">Practice case briefs</a></p>
+</section>
+
+<section>
+  <h2>Subjects</h2>
+  <div class="grid">
+    {% for s in subjects %}
+    <a class="card" href="/subjects/{{ s.slug }}">
+      <h3>{{ s.name }}</h3>
+      <p>{{ s.description }}</p>
+      <span>{{ s.level }}</span>
+    </a>
+    {% endfor %}
+  </div>
+  <p><a href="/subjects">See all subjects →</a></p>
+</section>
+
+<section>
+  <h2>Learn the method, not just the answer</h2>
+  <p>Every practice brief follows the same structure: facts, issue, rule, application, conclusion — IRAC. That structure is what turns reading into exam-ready revision.</p>
+  <div class="grid">
+    {% for c in cases %}
+    <a class="card" href="/cases/{{ c.slug }}">
+      <h3>{{ c.title }}</h3>
+      <p>{{ c.principle }}</p>
+      <span>{{ c.subject }}</span>
+    </a>
+    {% endfor %}
+  </div>
+</section>
+
+<section>
+  <h2>Plans</h2>
+  <p>Free browsing at launch. Monthly and annual subscriptions are planned, but payments are not connected yet — prices will be confirmed before anyone is asked to pay.</p>
+  <p><a href="/plans">See plans →</a></p>
+</section>
+{% endblock %}

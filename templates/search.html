@@ -1,0 +1,13 @@
+{% extends "base.html" %}
+{% block title %}Search — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>Search{% if query %}: “{{ query }}”{% endif %}</h1>
+{% if not query %}
+<p>Use the search box above to find a subject, topic or practice brief.</p>
+{% elif not subjects and not cases %}
+<p>No matches yet in v0.1. Try “contract”, “negligence”, “constitution” or “trust”.</p>
+{% else %}
+{% if subjects %}<h2>Subjects</h2><ul>{% for s in subjects %}<li><a href="/subjects/{{ s.slug }}">{{ s.name }}</a> — {{ s.description }}</li>{% endfor %}</ul>{% endif %}
+{% if cases %}<h2>Practice briefs</h2><ul>{% for c in cases %}<li><a href="/cases/{{ c.slug }}">{{ c.title }}</a> — {{ c.subject }}</li>{% endfor %}</ul>{% endif %}
+{% endif %}
+{% endblock %}

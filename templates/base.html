@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}LexStudy Ghana{% endblock %}</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+<header class="topbar">
+  <a class="brand" href="/">LexStudy Ghana</a>
+  <nav>
+    <a href="/subjects">Subjects</a>
+    <a href="/cases">Case briefs</a>
+    <a href="/plans">Plans</a>
+  </nav>
+  <form class="searchbar" action="/search" method="get">
+    <input name="q" placeholder="Search notes and briefs…" value="{{ query|default('') }}">
+    <button type="submit">Search</button>
+  </form>
+</header>
+<main>
+  {% block content %}{% endblock %}
+</main>
+<footer>
+  <p><strong>Study aid only, not legal advice.</strong> Practice briefs use hypothetical facts and are not reports of real judgments. Real case briefs must be verified against the authoritative judgment before publication.</p>
+  <p>LexStudy Ghana v0.1 · Working name · Independent of Powell Digital Blueprints.</p>
+</footer>
+</body>
+</html>

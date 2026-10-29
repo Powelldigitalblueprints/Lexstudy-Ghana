@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}{{ case.title }} — LexStudy Ghana{% endblock %}
+{% block content %}
+<p><a href="/cases">← All case briefs</a></p>
+<p class="badge">{{ case.kind }}</p>
+<h1>{{ case.title }}</h1>
+<p><strong>Subject:</strong> {{ case.subject }}</p>
+<h2>Facts</h2><p>{{ case.facts }}</p>
+<h2>Issue</h2><p>{{ case.issue }}</p>
+<h2>Rule</h2><p>{{ case.rule }}</p>
+<h2>Application</h2><p>{{ case.application }}</p>
+<h2>Conclusion</h2><p>{{ case.conclusion }}</p>
+<p><strong>Principle to remember:</strong> {{ case.principle }}</p>
+{% endblock %}

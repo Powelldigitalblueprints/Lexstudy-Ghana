@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Case briefs — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>Case briefs</h1>
+<p class="warning">These v0.1 briefs are practice briefs on hypothetical facts. They teach IRAC structure. They are not reports of real judgments and must not be cited as cases.</p>
+<div class="grid">
+  {% for c in cases %}
+  <a class="card" href="/cases/{{ c.slug }}">
+    <h3>{{ c.title }}</h3>
+    <p>{{ c.principle }}</p>
+    <span>{{ c.subject }}</span>
+  </a>
+  {% endfor %}
+</div>
+{% endblock %}

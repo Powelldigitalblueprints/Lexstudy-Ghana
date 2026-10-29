@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}Plans — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>Plans</h1>
+<p>Free browsing at launch. Paid plans are planned as monthly and annual subscriptions, but no payment provider is connected in v0.1 and no price is set yet.</p>
+<div class="grid">
+  {% for p in plans %}
+  <article class="card">
+    <h3>{{ p.name }}</h3>
+    <p><strong>{{ p.price }}</strong> {{ p.period }}</p>
+    <ul>{% for f in p.features %}<li>{{ f }}</li>{% endfor %}</ul>
+    <p>{{ p.cta }}</p>
+  </article>
+  {% endfor %}
+</div>
+{% endblock %}

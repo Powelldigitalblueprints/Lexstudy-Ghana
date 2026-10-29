@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}{{ subject.name }} — LexStudy Ghana{% endblock %}
+{% block content %}
+<p><a href="/subjects">← All subjects</a></p>
+<h1>{{ subject.name }}</h1>
+<p class="lead">{{ subject.description }}</p>
+<h2>Topics</h2>
+<ul>{% for t in subject.topics %}<li>{{ t }}</li>{% endfor %}</ul>
+<h2>Study notes</h2>
+{% for n in subject.notes %}
+<article class="note">
+  <h3>{{ n.title }}</h3>
+  <p>{{ n.summary }}</p>
+  <ul>{% for p in n.points %}<li>{{ p }}</li>{% endfor %}</ul>
+</article>
+{% endfor %}
+{% if related %}
+<h2>Practice briefs in this subject</h2>
+<ul>{% for c in related %}<li><a href="/cases/{{ c.slug }}">{{ c.title }}</a></li>{% endfor %}</ul>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,25 @@
+* { box-sizing: border-box; }
+body { margin: 0; font-family: system-ui, -apple-system, Segoe UI, Roboto, sans-serif; color: #1a1a1a; line-height: 1.6; }
+.topbar { display: flex; flex-wrap: wrap; gap: 1rem; align-items: center; padding: 1rem; background: #0f2a3d; color: #fff; }
+.topbar a { color: #fff; text-decoration: none; margin-right: 1rem; }
+.brand { font-weight: 800; font-size: 1.25rem; }
+.searchbar { margin-left: auto; display: flex; gap: .5rem; }
+.searchbar input { padding: .5rem; border-radius: 6px; border: 1px solid #ccc; min-width: 200px; }
+button, .btn { background: #c08a2b; color: #fff; border: 0; border-radius: 6px; padding: .6rem 1rem; cursor: pointer; text-decoration: none; display: inline-block; }
+.btn.secondary { background: #0f2a3d; }
+main { max-width: 900px; margin: 0 auto; padding: 1.5rem 1rem 3rem; }
+.hero { padding: 2rem 0; }
+.hero h1 { font-size: 2.2rem; line-height: 1.2; }
+.grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1rem; margin: 1rem 0; }
+.card { border: 1px solid #ddd; border-radius: 10px; padding: 1rem; text-decoration: none; color: inherit; background: #fff; }
+.card h3 { margin-top: 0; }
+.card span { color: #666; font-size: .9rem; }
+.note { border-left: 4px solid #c08a2b; padding: .5rem 1rem; margin: 1rem 0; background: #fdf8ef; }
+.lead { font-size: 1.1rem; }
+.warning, .badge { background: #fff3cd; border: 1px solid #e6c87a; padding: .75rem 1rem; border-radius: 8px; display: inline-block; }
+footer { border-top: 1px solid #ddd; padding: 1.5rem 1rem; color: #555; font-size: .9rem; text-align: center; }
+@media (max-width: 640px) {
+  .hero h1 { font-size: 1.7rem; }
+  .searchbar { margin-left: 0; width: 100%; }
+  .searchbar input { flex: 1; min-width: 0; }
+}
