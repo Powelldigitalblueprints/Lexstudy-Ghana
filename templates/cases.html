@@ -4,6 +4,28 @@
 <h1>Case briefs</h1>
 <h2>Cited briefs — real cases, with citations and sources</h2>
 <p>These are summaries, not full judgments. Check the reported judgment before citing a case in court work.</p>
+<form method="get" action="/cases">
+  <label>Subject:
+    <select name="subject">
+      <option value="">All subjects</option>
+      {% for s in subjects %}
+      <option value="{{ s.slug }}" {% if s.slug == subject_slug %}selected{% endif %}>{{ s.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Court:
+    <select name="court">
+      <option value="">All courts</option>
+      <option value="supreme" {% if court == "supreme" %}selected{% endif %}>Supreme Court</option>
+      <option value="appeal" {% if court == "appeal" %}selected{% endif %}>Court of Appeal</option>
+      <option value="high" {% if court == "high" %}selected{% endif %}>High Court</option>
+    </select>
+  </label>
+  <label>Title, citation or principle: <input name="q" value="{{ q }}"></label>
+  <button type="submit">Filter</button>
+  {% if filtering %}<a href="/cases">Clear filters</a>{% endif %}
+</form>
+<p>{{ count }} cited brief{% if count != 1 %}s{% endif %}{% if filtering %} matching your filters{% endif %}.</p>
 <div class="grid">
   {% for c in verified %}
   <a class="card" href="/cases/{{ c.slug }}">
@@ -13,6 +35,7 @@
   </a>
   {% endfor %}
 </div>
+{% if not filtering %}
 <h2>Practice briefs — hypothetical facts</h2>
 <p class="warning">These briefs teach IRAC structure. They are not reports of real judgments and must not be cited as cases.</p>
 <div class="grid">
@@ -24,4 +47,5 @@
   </a>
   {% endfor %}
 </div>
+{% endif %}
 {% endblock %}

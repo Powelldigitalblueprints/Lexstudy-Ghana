@@ -1,4 +1,4 @@
-"""Database storage for LexStudy Ghana v0.2.1.
+"""Database storage for LexStudy Ghana v0.3.
 
 Two backends, one interface:
 
@@ -54,6 +54,27 @@ CREATE TABLE IF NOT EXISTS irac_attempts (
     conclusion TEXT NOT NULL,
     created_at TEXT DEFAULT (datetime('now'))
 );
+CREATE TABLE IF NOT EXISTS flashcard_reviews (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    card_id TEXT NOT NULL,
+    deck_slug TEXT NOT NULL,
+    ease REAL NOT NULL DEFAULT 2.5,
+    interval_days INTEGER NOT NULL DEFAULT 0,
+    due TEXT NOT NULL,
+    reviews INTEGER NOT NULL DEFAULT 0,
+    last_grade TEXT,
+    updated_at TEXT DEFAULT (datetime('now')),
+    UNIQUE (user_id, card_id)
+);
+CREATE TABLE IF NOT EXISTS mock_attempts (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    mock_slug TEXT NOT NULL,
+    score INTEGER NOT NULL,
+    total INTEGER NOT NULL,
+    created_at TEXT DEFAULT (datetime('now'))
+);
 """
 
 PG_SCHEMA = """
@@ -88,6 +109,27 @@ CREATE TABLE IF NOT EXISTS irac_attempts (
     rule TEXT NOT NULL,
     application TEXT NOT NULL,
     conclusion TEXT NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE TABLE IF NOT EXISTS flashcard_reviews (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    card_id TEXT NOT NULL,
+    deck_slug TEXT NOT NULL,
+    ease REAL NOT NULL DEFAULT 2.5,
+    interval_days INTEGER NOT NULL DEFAULT 0,
+    due TEXT NOT NULL,
+    reviews INTEGER NOT NULL DEFAULT 0,
+    last_grade TEXT,
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE (user_id, card_id)
+);
+CREATE TABLE IF NOT EXISTS mock_attempts (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    mock_slug TEXT NOT NULL,
+    score INTEGER NOT NULL,
+    total INTEGER NOT NULL,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 """

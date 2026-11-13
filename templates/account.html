@@ -21,4 +21,12 @@
 {% else %}
 <p>No IRAC practice yet. <a href="/irac">Try the IRAC trainer</a>.</p>
 {% endif %}
+<h2>Flashcards</h2>
+<p>{{ flashcard_summary.reviewed }} of {{ flashcard_summary.total }} cards reviewed · {{ flashcard_summary.due }} due today (including cards never reviewed). <a href="/flashcards">Review flashcards</a>.</p>
+<h2>Timed mocks</h2>
+{% if mock_attempts %}
+<ul>{% for a in mock_attempts %}<li>{{ mocks[a.mock_slug].title }} — {{ a.score }}/{{ a.total }} · {{ a.created_at }}</li>{% endfor %}</ul>
+{% else %}
+<p>No timed mocks yet. <a href="/mocks">Try a timed mock</a>.</p>
+{% endif %}
 {% endblock %}

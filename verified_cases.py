@@ -1,4 +1,4 @@
-"""Cited briefs for LexStudy Ghana v0.2.
+"""Cited briefs for LexStudy Ghana v0.3.
 
 These are summaries of real judgments, checked against the public
 sources listed for each case. They are NOT reproductions of the full
@@ -7,11 +7,14 @@ judgment before citing a case in court work or in an exam that
 requires a full citation. If a detail here conflicts with the
 reported judgment, the reported judgment prevails.
 
-Sources consulted are listed in plain words for each case. Only the
-Dennislaw preview link for Tuffour and the Graphic article for the
-31 December case are linked, because those were the pages actually
-returned in research; other sources are named, not linked, so no
-URL is guessed.
+Sources consulted are listed in plain words for each case. Links
+are given only where a page was actually returned in research:
+the Dennislaw previews for Tuffour, Kotokoli and NPP v
+Inspector-General of Police, the Graphic article for the
+31 December case, and the SuperLawGH judgment page for
+Asantekramo. Other sources are named, not linked, so no URL is
+guessed. The full verification record, including dates checked
+and candidates not used, is in VERIFICATION-LOG.md.
 """
 
 VERIFIED_CASES = [
@@ -79,6 +82,212 @@ VERIFIED_CASES = [
         ],
         "source_link": "",
         "source_link_label": "",
+    },
+    {
+        "slug": "nthc-v-antwi",
+        "title": "NTHC Ltd v Antwi",
+        "subject": "Law of Contract",
+        "kind": "CITED BRIEF — real case, summary checked against sources below",
+        "citation": "[2009] SCGLR 117",
+        "court": "Supreme Court of Ghana",
+        "decided": "4 February 2009",
+        "facts": "Yaa Antwi worked for NTHC Ltd as head of its legal department. In January 2005 NTHC wrote to her offering her the first chance to buy the company house she occupied, House No. 4, Plateau Close, East Legon Extension, at a stated cost price, with payment within six months. She replied in writing accepting the offer and asking where payment should be made. NTHC later said the letter had only been an invitation to treat and that no contract existed. The trial court agreed with NTHC; the Court of Appeal found a binding offer.",
+        "issue": "Was NTHC's letter a definite offer capable of acceptance, or a mere invitation to treat — and did Antwi's reply accept it, or was her question about payment a counter-offer?",
+        "rule": "An offer is a statement, in words or by conduct, showing a willingness to be bound on the terms stated as soon as it is accepted. It must be definite and final, leaving no significant term open for further negotiation. A reply that only asks for information about carrying out the deal is not a counter-offer.",
+        "application": "The letter named the house, the price and the payment period, so nothing significant was left open. Antwi's reply accepted those terms. Her question about where to pay went to performance of the bargain, not to its terms, so it did not destroy the acceptance.",
+        "conclusion": "A binding contract was formed. The letter was an offer, and it was validly accepted. The case is a leading Ghanaian authority on telling an offer from an invitation to treat.",
+        "principle": "An offer that names the property, the price and the time to pay leaves nothing to negotiate — and asking how to pay does not unmake an acceptance.",
+        "sources": [
+            "Ghana Law Hub article on formation of contract, quoting Date-Bah JSC in NTHC Ltd v Antwi [2009] SCGLR 117 at 125 on the definition of an offer.",
+            "Case summary of Antwi v NTHC [2009] GHASC 5, giving the judgment date 4 February 2009, the coram, the letters of January 2005 and the invitation-to-treat defence.",
+            "FALAS Ghana 'Case of the Week' summary of NTHC v Antwi [2009] SCGLR 117, on the facts, issue and holding.",
+            "CliffsNotes study summary of NTHC Ltd v Antwi [2009] SCGLR 117, on the definite-and-final requirement for an offer.",
+        ],
+        "source_link": "",
+        "source_link_label": "",
+    },
+    {
+        "slug": "fofie-v-zanyo",
+        "title": "Fofie v Zanyo",
+        "subject": "Law of Contract",
+        "kind": "CITED BRIEF — real case, summary checked against sources below",
+        "citation": "[1992] 2 GLR 475",
+        "court": "Supreme Court of Ghana",
+        "decided": "23 June 1992",
+        "facts": "In 1975 the plaintiff took a tenancy of a house at Nima, Accra. In October 1976 the owners wrote offering to sell him the house for ¢75,000, asking him to confirm so that a meeting with his solicitor could be arranged to finalise the sale. He never replied in writing, no meeting was arranged, and no other sign of acceptance reached the owners. About ten years later he claimed he had accepted the offer and sought to enforce the sale.",
+        "issue": "Was there a communicated acceptance, made within a reasonable time, that formed a binding contract for the sale of the house?",
+        "rule": "An acceptance must be plain, unqualified and communicated to the offeror, without unreasonable delay. A decision to accept that stays in the offeree's mind — a mere mental acceptance — has no effect in law. For a sale of land, a written acceptance was essential under the writing requirements then in force.",
+        "application": "No reply letter was written, no meeting was arranged, and nothing showing acceptance was communicated to the owners. An offer made to relieve urgent financial difficulty could not be held open for ten years; time eroded any claim that acceptance had followed promptly.",
+        "conclusion": "No contract was formed, and the claim to enforce the sale failed. The case is the standard Ghanaian authority that acceptance must be communicated, not merely decided.",
+        "principle": "Deciding to accept is not accepting. Until the offeror is told, in the way the deal requires, there is no agreement.",
+        "sources": [
+            "Dennis Law report text of Fofie v Zanyo [1992] 2 GLR 475, giving the date 23 June 1992, the coram, the judgment of Francois JSC, the 1975 tenancy and the October 1976 offer letter.",
+            "GIMPA Business School lecture notes on the legal environment of business, stating the holding that an uncommunicated acceptance was ineffective.",
+            "Business and Financial Times article on silence and contractual consent, stating the Fofie v Zanyo principle on positive evidence of acceptance and communication.",
+        ],
+        "source_link": "",
+        "source_link_label": "",
+    },
+    {
+        "slug": "asantekramo-v-attorney-general",
+        "title": "Asantekramo alias Kumah v Attorney-General",
+        "subject": "Law of Tort",
+        "kind": "CITED BRIEF — real case, summary checked against sources below",
+        "citation": "[1975] 1 GLR 319",
+        "court": "High Court, Kumasi",
+        "decided": "5 May 1975",
+        "facts": "A nineteen-year-old woman diagnosed with a ruptured ectopic pregnancy underwent urgent surgery at the then Okomfo Anokye Hospital, Kumasi. The surgery itself succeeded, but her right arm became swollen and gangrenous after a blood transfusion through a vein in that arm, and the arm had to be amputated to save her life. She sued the State, through the Attorney-General, for negligence by the hospital staff.",
+        "issue": "Was the hospital negligent in the care that led to the amputation, and was the State liable for its staff's negligence?",
+        "rule": "Where an injury of this kind does not ordinarily happen without negligence, the facts may speak for themselves (res ipsa loquitur) and call for an explanation from the defendant. The State answers for negligence committed by staff of a government hospital.",
+        "application": "Expert evidence linked the infection to the transfusion needle or to a dextrose infusion given to the patient. The explanation offered at trial, that what happened was a mystery, did not displace the inference of negligence arising from the facts.",
+        "conclusion": "The State was held liable for the hospital's negligence and damages were awarded. The decision has since been criticised in medical commentary for its handling of the expert evidence — a reminder that a reported case teaches the legal reasoning, while later discussion can question the facts found.",
+        "principle": "When the facts speak for themselves, 'it is a mystery' is not a defence.",
+        "sources": [
+            "SuperLawGH judgment page for Asantekramo alias Kumah v Attorney-General [1975] 1 GLR 319, giving High Court, Kumasi, date 5 May 1975, Taylor J, and the nature of the proceedings.",
+            "Ghana Medical Journal systematic content analysis of medical malpractice cases in Ghana (2022), summarising the facts, the res ipsa loquitur principle and the holding.",
+            "Graphic Online article on medical negligence in Ghana, confirming the case as a High Court, Kumasi decision of 1975.",
+            "Plange-Rhule review in the Postgraduate Medical Journal of Ghana, summarising the facts and criticising aspects of the judge's handling of the medical evidence.",
+        ],
+        "source_link": "https://superlawgh.com/judgements/asantekramo-alias-kumah-v-attorney-general-1975-1-glr-319/",
+        "source_link_label": "SuperLawGH judgment page (report of the case)",
+    },
+    {
+        "slug": "kotokoli-v-moro-hausa",
+        "title": "Allasan Kotokoli v Moro Hausa and Another",
+        "subject": "Law of Tort",
+        "kind": "CITED BRIEF — real case, summary checked against sources below",
+        "citation": "[1967] GLR 298",
+        "court": "High Court, Accra",
+        "decided": "4 May 1967",
+        "facts": "The plaintiff accepted a lift on a timber truck travelling the Oda-Abenase road. The truck was built to carry logs, was licensed to carry only two people, and its driver had been told by the owners not to carry passengers. The plaintiff sat on a toolbox, the only seating provided. He was thrown off the truck, a rear tyre ran over his left leg, and the leg was later amputated. He sued the driver and the owners, alleging negligence in failing to provide proper seating.",
+        "issue": "Did the defendants owe the plaintiff a duty of care in the driving of the truck, and was there negligence in the seating provided for him?",
+        "rule": "Negligence requires duty, breach of that duty, and damage resulting from the breach. A duty of care is owed to persons who might reasonably be anticipated as likely to be injured by the conduct in question — not to the world at large. A person who knowingly accepts an obvious risk may meet the defence of volenti non fit injuria.",
+        "application": "The court accepted that the plaintiff had been offered the lift, but found that the driver had done all that was reasonable in the circumstances about seating, and that the pleaded negligence was not proved. Against the owners, the plaintiff's position was discussed as that of a trespasser who knew the risks of accepting the lift.",
+        "conclusion": "The claim failed: negligence was not established against the driver. The case is a standard Ghanaian authority on the three elements of negligence and on the limits of the duty of care.",
+        "principle": "Duty of care is owed to those foreseeably at risk in the circumstances — and the circumstances include what the claimant knew and chose.",
+        "sources": [
+            "Dennislaw case preview for Allasan Kotokoli v Moro Hausa and Another [1967] DLHC1446, summarising the accident, the factual dispute and the findings.",
+            "Ghana Law Reports headnote for [1967] GLR 298-304, giving High Court, Accra, 4 May 1967, Edusei J, and the holdings on duty, seating and volenti.",
+            "Supreme Court judgment in Banahene v Shell Ghana Ltd [2017] GHASC 48, citing Kotokoli for the three elements of negligence: duty, breach and damage.",
+        ],
+        "source_link": "https://dennislawgh.com/case-preview?dl_citation_no=%5B1967%5DDLHC1446",
+        "source_link_label": "Dennislaw case preview (summary, not the full judgment)",
+    },
+    {
+        "slug": "sene-v-the-republic",
+        "title": "Sene and Another v The Republic",
+        "subject": "Criminal Law",
+        "kind": "CITED BRIEF — real case, summary checked against sources below",
+        "citation": "[1977] 1 GLR 434",
+        "court": "Court of Appeal, Accra",
+        "decided": "31 December 1976",
+        "facts": "Two brothers were convicted of murdering William Kwame Kwadam. The deceased had started an unlawful fight with the first appellant, and during the fight the second appellant threw a heavy stone at the deceased from behind. The deceased died from the injuries inflicted on him. In summing up, the trial judge put emphasis on who had started the fight, and did not deal with provocation.",
+        "issue": "Did the trial judge misdirect the jury on the question of intention, and was the failure to deal with provocation also a misdirection?",
+        "rule": "For murder, the prosecution must prove an intention to cause death, as distinct from a mere intention to fight. Such an intention may be inferred from the weapon used or the manner in which the harm was inflicted, but not simply from who began the fight. A defence that is open on the evidence must be put to the jury even if the accused did not rely on it.",
+        "application": "Starting a fight does not by itself show an intention to kill. The judge's emphasis on who began the fight, and the omission to address provocation, left the jury without the guidance the law required on the central question of intent.",
+        "conclusion": "The murder convictions were quashed and convictions for manslaughter substituted. The case is a leading Ghanaian authority on proving intention in homicide.",
+        "principle": "Who started the fight is not the question. Did this accused intend to kill? That is.",
+        "sources": [
+            "Case summary of Sene and Another v The Republic [1977] 1 GLR 434-440, giving Court of Appeal, Accra, 31 December 1976, the brief facts, issues and holdings.",
+            "LLB Criminal Law notes (LAW 288), table of Ghanaian cases and discussion of Sene under direct intent in section 11 of Act 29.",
+            "Mens rea lecture slides quoting the Sene holding on intention to cause death as distinct from intention to fight.",
+            "Modern Ghana article on the reach of the law, citing Sene [1977] 1 GLR 434-440 for the proposition that starting a fight does not necessarily show intention to kill.",
+        ],
+        "source_link": "",
+        "source_link_label": "",
+    },
+    {
+        "slug": "akorful-v-the-state",
+        "title": "Akorful v The State",
+        "subject": "Criminal Law",
+        "kind": "CITED BRIEF — real case, summary checked against sources below",
+        "citation": "[1963] 2 GLR 371",
+        "court": "Supreme Court of Ghana",
+        "decided": "1963",
+        "facts": "At about 1 a.m. the appellant heard someone trying to force open his window. He took up his gun, went out to investigate, and saw someone walking in the dark. He shouted at the person and got no answer. Thinking the person was a thief, he fired his gun in the direction the person was coming from, intending to scare him away. His shots hit and killed Kofi Buabeng. At trial, the judge directed the jury using the objective reasonable-man test from the House of Lords decision in DPP v Smith.",
+        "issue": "Was the jury misdirected on intention by the use of the objective reasonable-man test, rather than the test in Ghana's Criminal Offences Act?",
+        "rule": "Under section 11 of the Criminal Offences Act, 1960 (Act 29), intention turns on the accused's own purpose or belief, with a presumption about the natural and probable consequences of an act that the accused may rebut by showing what he actually believed. Motive is not the same as intention.",
+        "application": "The objective test asks what a reasonable person would have foreseen. Ghana's statute asks what this accused intended or believed. Directing the jury on the wrong test, on the only live issue in the case, was a serious misdirection.",
+        "conclusion": "The Supreme Court held that DPP v Smith was not an authority on the law of murder in Ghana, and that the trial judge had seriously misdirected the jury. The case is the standard Ghanaian authority against importing the objective test into section 11.",
+        "principle": "Intention is judged by what the accused meant and believed — not by what a reasonable stranger would have foreseen.",
+        "sources": [
+            "Mens rea lecture slides on section 11 of Act 29, giving the Akorful facts, the DPP v Smith direction, the Supreme Court's disapproval and the citation [1963] 2 GLR 371.",
+            "LLB Criminal Law notes (LAW 288), table of Ghanaian cases and discussion of Akorful under intention.",
+            "UPSA Law School lecture notes on fatal offences, citing Akorful v The State [1963] 2 GLR 371 for motive being immaterial and intent being inferred from the circumstances.",
+            "Brobbey, Essentials of the Ghana Law of Evidence, table of cases, listing Akorful v The State [1963] 2 GLR 371, SC.",
+            "Wisconsin International University College criminal law course outline, listing Rep. v Kobina Akorful [1963] 2 GLR 371 (the same case, cited under the accused's full name).",
+        ],
+        "source_link": "",
+        "source_link_label": "",
+    },
+    {
+        "slug": "manu-v-ainoo",
+        "title": "Manu v Ainoo and Another",
+        "subject": "Land Law",
+        "kind": "CITED BRIEF — real case, summary checked against sources below",
+        "citation": "[1976] 1 GLR 457",
+        "court": "Court of Appeal",
+        "decided": "1976",
+        "facts": "The dispute concerned a customary farming tenancy of the abusa/abunu kind: a tenant farmer cultivated land belonging to the landlord and shared the farm proceeds with the landlord. The question was what interest the tenant acquired in the arrangement — an interest in the land itself, or only in the proceeds — and whether the landlord could bring the tenancy to an end at will.",
+        "issue": "Does a customary tenant acquire title or an estate in the land, and can the landlord unilaterally annul the tenancy?",
+        "rule": "A customary tenancy gives the tenant the right to cultivate the land and to partake of the proceeds. It is created in respect of the share of the proceeds only, not the land, so ownership of the land remains always with the landlord. Forfeiture of such a tenancy is sparingly exercised: there must be the clearest indication for it, and the defaulter must have every opportunity to explain or mend their ways.",
+        "application": "The tenant's interest was in the proceeds of the farm, not in the land, so the land remained the landlord's and the tenant acquired no estate in it. But customary law did not permit the landlord simply to annul the tenancy without proper cause and process.",
+        "conclusion": "The Court of Appeal restated both limits: the tenant's interest stops at the proceeds, and the landlord's power to end the tenancy is tightly constrained. The case remains a standard authority on the classical customary-tenancy position, but later developments — the Supreme Court in Lamptey alias Nkpa v Fanyie, and the Land Act, 2020 (Act 1036), section 7 — have developed how customary tenancies operate, so check current law before relying on the 1976 position alone.",
+        "principle": "A customary tenant owns a share of the harvest, not a share of the land — but the landlord cannot take even that away on a whim.",
+        "sources": [
+            "Customary tenancy study paper, citing Manu v Ainoo [1976] 1 GLR 457, C.A., for the tenant's limited interest and quoting Francois JA on unilateral annulment and forfeiture.",
+            "Compilation of customary land laws and tenancies (Academia), citing Manu v Ainoo (1976) 1 GLR 457, C.A., for the same holding.",
+            "District Court judgments of 2023 (Kwaku Asare v Yaw Boli) and 2025 (Serwaa v Abesimhene) applying Manu v Ainoo and Another [1976] GLR 457 on abusa/abunu tenancies.",
+            "Dennislaw blog on the Land Act, 2020, citing Manu v Ainoo and Another [1976] 1 GLR 457 on customary tenancy.",
+        ],
+        "source_link": "",
+        "source_link_label": "",
+    },
+    {
+        "slug": "cofie-v-forson",
+        "title": "Cofie and Others v Forson and Others",
+        "subject": "Equity and Trusts",
+        "kind": "CITED BRIEF — real case, summary checked against sources below",
+        "citation": "[1992] 1 GLR 312",
+        "court": "High Court, Accra",
+        "decided": "1989",
+        "facts": "A testator put an estate house in Y's name, and later, by a statutory declaration dated 21 April 1976, declared that he held the house in trust for Y and named children. After his death, his children by his first wife asked the court to determine whether they were beneficiaries of the house held on trust. The executors argued that the declaration created at most a discretionary arrangement which the testator could revoke at will.",
+        "issue": "Did the statutory declaration create an express trust in favour of the named beneficiaries?",
+        "rule": "To create a trust there must be three prerequisites, popularly described as the three certainties: the words used must be imperative, the subject matter must be definite and certain, and the objects or beneficiaries must be identifiable and ascertainable.",
+        "application": "The words of the declaration were, without doubt, trust words. Given the testator's background as a literate chief superintendent of police, his choice of words could be taken to represent what he really intended. Nothing was ambiguous about the intention, the property or the beneficiaries.",
+        "conclusion": "An express trust was definitely and positively created. The case is a standard Ghanaian authority on the three certainties, and its statement of them has been endorsed in later Supreme Court reasoning.",
+        "principle": "Clear words, clear property, clear beneficiaries — that is all equity asks before it fastens a trust on the conscience.",
+        "sources": [
+            "Case headnote record for Cofie and Others v Forson and Others, giving High Court, Accra, 1989, [1992] 1 GLR 312, the headnotes on the statutory declaration and the holding on the three certainties.",
+            "Supreme Court judgment in Adu and Another v Okyere and Another [2026] GHASC 47, endorsing the views of Brobbey J in Cofie and Others v Forson and Others [1992] 1 GLR 312.",
+            "Circuit Court judgment, Goaso, 16 February 2024, quoting the Cofie three-certainties statement.",
+            "Trusts lecture slides listing Cofie v Forson [1992] 1 GLR 312 among the cases on the three certainties.",
+        ],
+        "source_link": "",
+        "source_link_label": "",
+    },
+    {
+        "slug": "npp-v-inspector-general-of-police",
+        "title": "New Patriotic Party v Inspector-General of Police",
+        "subject": "Constitutional Law",
+        "kind": "CITED BRIEF — real case, summary checked against sources below",
+        "citation": "[1993-94] 2 GLR 459",
+        "court": "Supreme Court of Ghana",
+        "decided": "30 November 1993",
+        "facts": "In February 1993 the New Patriotic Party obtained a police permit for a rally at Sekondi, which the police later withdrew. A peaceful demonstration in Accra against the 1993 budget was broken up by police and some demonstrators were arrested. A permit for a rally at Kyebi was withdrawn on the day of the rally. The party challenged sections of the Public Order Decree, 1972 (NRCD 68), which required prior police permission for public assemblies and demonstrations.",
+        "issue": "Were the permit provisions of NRCD 68 inconsistent with the freedom of assembly guaranteed by article 21(1)(d) of the 1992 Constitution, and therefore void?",
+        "rule": "Freedom of assembly is guaranteed by article 21(1)(d) of the 1992 Constitution. Restrictions on it must fall within the limits that article 21(4) permits. A law inconsistent with the Constitution is void to the extent of the inconsistency.",
+        "application": "A regime of prior police permission, with permits withdrawable at will, subjected a constitutional freedom to executive discretion going beyond what article 21(4) allows. The freedom could not be made to depend on a permit that the police might grant, refuse or withdraw.",
+        "conclusion": "The permit provisions were held inconsistent with the Constitution and void. The decision shaped the Public Order Act, 1994 (Act 491), which replaced the permission regime with a notification regime.",
+        "principle": "A constitutional freedom is not a favour the police may grant or withdraw.",
+        "sources": [
+            "Administrative law case analysis of NPP v Inspector-General of Police [1993-94] 2 GLR 459, giving the Supreme Court coram, the NRCD 68 provisions challenged, and the Sekondi, Accra and Kyebi facts.",
+            "Course document giving the case as [1993-94] 2 GLR 459, date 30 November 1993, Dennislaw [1993] DLSC769, Supreme Court, Accra.",
+            "Supreme Court judgment in Customs Excise & Preventive Service v National Labour Commission (4 February 2009), discussing NPP v Inspector-General of Police (1993-94) 2 GLR 459 and the Public Order Act, 1994.",
+            "Constitutional Law course outlines (2024 and 2020/2021) listing NPP v Inspector-General of Police (1993-94) 2 GLR 459 among the required cases.",
+        ],
+        "source_link": "https://www.dennislawgh.com/case-preview?dl_citation_no=[1993]DLSC769",
+        "source_link_label": "Dennislaw case preview (summary, not the full judgment)",
     },
 ]
 

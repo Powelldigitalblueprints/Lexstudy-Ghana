@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block title %}{{ mock.title }} — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>{{ mock.title }}</h1>
+<p>{{ mock.subject }} · {{ mock.questions|length }} questions · {{ time_limit }} minutes. The timer starts when this page loads; when it reaches zero, your answers are submitted automatically.</p>
+<p><strong>Time left: <span id="countdown">{{ time_limit }}:00</span></strong></p>
+<form method="post" id="mock-form">
+{% for question in mock.questions %}
+{% set qindex = loop.index0 %}
+<fieldset>
+  <legend>{{ loop.index }}. {{ question.q }}</legend>
+  {% for opt in question.options %}
+  <p><label><input type="radio" name="q{{ qindex }}" value="{{ loop.index0 }}"> {{ opt }}</label></p>
+  {% endfor %}
+</fieldset>
+{% endfor %}
+<button type="submit">Submit answers</button>
+</form>
+<script>
+var seconds = {{ time_limit }} * 60;
+var display = document.getElementById('countdown');
+var form = document.getElementById('mock-form');
+var timer = setInterval(function() {
+  seconds -= 1;
+  if (seconds <= 0) {
+    clearInterval(timer);
+    display.textContent = '0:00';
+    form.submit();
+    return;
+  }
+  var m = Math.floor(seconds / 60);
+  var s = seconds % 60;
+  display.textContent = m + ':' + (s < 10 ? '0' : '') + s;
+}, 1000);
+</script>
+{% endblock %}

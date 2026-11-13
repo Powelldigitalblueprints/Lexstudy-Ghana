@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Timed mocks — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>Timed mocks</h1>
+<p>Each mock uses the same questions as its quiz, under a {{ time_limit }}-minute countdown. When the time runs out, your answers are submitted automatically. Log in and your score is saved to your account. The timer is a study aid: it runs in your browser and the server does not enforce the time limit.</p>
+<div class="grid">
+{% for mock in mocks %}
+<a class="card" href="/mocks/{{ mock.slug }}"><h3>{{ mock.title }}</h3><p>{{ mock.subject }} · {{ mock.questions|length }} questions · {{ mock.time_limit_minutes }} minutes</p></a>
+{% endfor %}
+</div>
+{% endblock %}

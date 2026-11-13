@@ -1,4 +1,4 @@
-"""Quiz bank for LexStudy Ghana v0.2.
+"""Quiz bank for LexStudy Ghana v0.3.
 
 Every question is tied to a principle already taught in the notes or
 in a cited brief. Answers are indices into options. Explanations are

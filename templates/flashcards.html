@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Flashcards — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>Flashcards</h1>
+<p>Short prompts drawn from the notes and cited briefs. Grade each card Again, Good or Easy, and it comes back on a spaced schedule — sooner when it is hard, later when it is easy. {% if current_user %}Your progress is saved to your account.{% else %}Log in and your progress is saved to your account; without logging in, grading only moves you through the deck in this session.{% endif %}</p>
+<div class="grid">
+{% for slug, deck in decks.items() %}
+<a class="card" href="/flashcards/{{ slug }}"><h3>{{ deck.subject }}</h3><p>{{ deck.cards|length }} cards · {{ due_counts[slug] }} due today</p></a>
+{% endfor %}
+</div>
+{% endblock %}

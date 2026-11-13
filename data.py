@@ -1,4 +1,4 @@
-"""Seed content for LexStudy Ghana v0.1.
+"""Seed content for LexStudy Ghana v0.3.
 
 Important: the case briefs in this file are PRACTICE briefs built on
 hypothetical facts for teaching IRAC. They are not reports of real
@@ -184,14 +184,14 @@ PLANS = [
         "name": "Monthly",
         "price": "Price to be confirmed",
         "period": "per month",
-        "features": ["Everything in Free", "Quizzes and IRAC practice (coming in v0.2)", "Saved notes and revision progress (coming in v0.2)"],
+        "features": ["Everything in Free", "Quizzes, IRAC practice, flashcards and timed mocks", "Saved bookmarks and revision progress"],
         "cta": "Payments not yet connected",
     },
     {
         "name": "Annual",
         "price": "Price to be confirmed",
         "period": "per year",
-        "features": ["Everything in Monthly", "Full revision tools (coming in v0.2)", "Best value for a full academic year"],
+        "features": ["Everything in Monthly", "Full revision tools", "Best value for a full academic year"],
         "cta": "Payments not yet connected",
     },
 ]

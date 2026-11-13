@@ -1,7 +1,8 @@
--- LexStudy Ghana — PostgreSQL schema for v0.2 (accounts, content, progress).
--- v0.2 runs accounts, bookmarks, quiz attempts and IRAC attempts on
--- SQLite locally (db.py) with this same table shape; PostgreSQL
--- wiring for Render is a deployment step, not a content change.
+-- LexStudy Ghana — PostgreSQL schema reference for v0.3.
+-- The live schema is created by db.py (CREATE TABLE IF NOT EXISTS)
+-- in both SQLite and PostgreSQL; this file is a reference copy of
+-- the PostgreSQL shape, including the content tables not yet used
+-- by the app (subjects, notes, cases).
 -- Do NOT load real case briefs into cases until each one is verified
 -- against its authoritative judgment. Practice briefs stay flagged is_practice=true.
 
@@ -78,5 +79,28 @@ CREATE TABLE IF NOT EXISTS irac_attempts (
   rule TEXT NOT NULL,
   application TEXT NOT NULL,
   conclusion TEXT NOT NULL,
+  created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+CREATE TABLE IF NOT EXISTS flashcard_reviews (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  card_id TEXT NOT NULL,
+  deck_slug TEXT NOT NULL,
+  ease REAL NOT NULL DEFAULT 2.5,
+  interval_days INTEGER NOT NULL DEFAULT 0,
+  due TEXT NOT NULL,
+  reviews INTEGER NOT NULL DEFAULT 0,
+  last_grade TEXT,
+  updated_at TIMESTAMPTZ DEFAULT NOW(),
+  UNIQUE (user_id, card_id)
+);
+
+CREATE TABLE IF NOT EXISTS mock_attempts (
+  id SERIAL PRIMARY KEY,
+  user_id INTEGER REFERENCES users(id),
+  mock_slug TEXT NOT NULL,
+  score INTEGER NOT NULL,
+  total INTEGER NOT NULL,
   created_at TIMESTAMPTZ DEFAULT NOW()
 );

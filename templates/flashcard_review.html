@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+{% block title %}{{ deck.subject }} flashcards — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>{{ deck.subject }} flashcards</h1>
+{% if card %}
+<p>{{ remaining }} of {{ total }} cards due in this session.</p>
+<article class="note">
+  <h3>{{ card.front }}</h3>
+  {% if show %}
+  <p>{{ card.back }}</p>
+  <form method="post" action="/flashcards/{{ slug }}/grade">
+    <input type="hidden" name="card_id" value="{{ card.id }}">
+    <button type="submit" name="grade" value="again">Again — I did not know it</button>
+    <button type="submit" name="grade" value="good">Good — I knew it</button>
+    <button type="submit" name="grade" value="easy">Easy — I knew it well</button>
+  </form>
+  {% else %}
+  <p><a class="btn" href="/flashcards/{{ slug }}?card={{ card.id }}&amp;show=1">Show answer</a></p>
+  {% endif %}
+</article>
+{% if not current_user %}<p><a href="/login">Log in</a> to save your grading and get a due-today queue that follows you.</p>{% endif %}
+{% else %}
+<p><strong>Deck complete.</strong> No more cards are due in this deck today. Cards you graded Again will come back tomorrow.</p>
+{% endif %}
+<p><a href="/flashcards">Back to flashcards</a> · <a href="/account">My account</a></p>
+{% endblock %}

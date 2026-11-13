@@ -1,4 +1,4 @@
-"""IRAC practice scenarios for LexStudy Ghana v0.2.
+"""IRAC practice scenarios for LexStudy Ghana v0.3.
 
 Scenarios are hypothetical unless stated otherwise. Model answers are
 teaching models, not court judgments. Students write their own IRAC,
