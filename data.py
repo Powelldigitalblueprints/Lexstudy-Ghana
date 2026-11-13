@@ -1,4 +1,4 @@
-"""Seed content for LexStudy Ghana v0.3.
+"""Seed content for LexStudy Ghana v0.3.1.
 
 Important: the case briefs in this file are PRACTICE briefs built on
 hypothetical facts for teaching IRAC. They are not reports of real
@@ -18,7 +18,19 @@ SUBJECTS = [
                 "title": "Start here: reading a judgment in four passes",
                 "summary": "First pass: who are the parties and what was decided? Second: what facts mattered? Third: what rule did the court apply? Fourth: why did that rule decide this case?",
                 "points": ["Separate the facts from the court's reasoning.", "Find the ratio decidendi, not just the outcome.", "Note any dissent or distinguishing facts for later revision."],
-            }
+            },
+            {
+                "title": "Sources of law in Ghana: Article 11",
+                "summary": "Article 11 of the 1992 Constitution lists the five sources of Ghanaian law, in order: the Constitution itself, Acts of Parliament, subsidiary legislation, the existing law, and the common law — which includes equity and customary law. If you can place a rule in one of those five boxes, you can say where it comes from and how strong it is.",
+                "points": [
+                    "The Constitution is supreme: any law inconsistent with it is void to the extent of the inconsistency (Article 1(2)). Parliament is therefore not supreme — it legislates only within the Constitution's parameters.",
+                    "Enactments (Article 11(1)(b)) are Acts of Parliament and laws made under Parliament's authority. A Bill becomes an Act after Parliament approves it and the President assents; Article 106 sets out the procedure and Article 107 bars retrospective criminal law.",
+                    "Subsidiary legislation (Article 11(1)(c)) is Orders, Rules and Regulations made by a person or authority under a power conferred by the Constitution — because Parliament cannot legislate for every technical detail itself. It must be laid before Parliament for 21 sitting days (Article 11(7)) before it matures into law.",
+                    "A Constitutional Instrument draws its power from the Constitution; a Legislative Instrument draws its power from a statute. An Executive Instrument is not legislative in nature and is not subsidiary legislation.",
+                    "The existing law (Article 11(4)–(6)) is the written and unwritten law in force immediately before the Constitution came into force on 7 January 1993. It survives, but it must be read with whatever modifications bring it into conformity with the Constitution.",
+                    "The common law of Ghana (Article 11(2)) comprises the common law, the doctrines of equity, and customary law, including customary law as determined by the Superior Court of Judicature. Customary law (Article 11(3)) means rules of law which by custom apply to particular communities in Ghana — it is local, not national.",
+                ],
+            },
         ],
     },
     {

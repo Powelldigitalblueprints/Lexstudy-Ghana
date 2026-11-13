@@ -1,4 +1,4 @@
-"""Flashcard decks for LexStudy Ghana v0.3.
+"""Flashcard decks for LexStudy Ghana v0.3.1.
 
 One deck per subject, seeded from the notes, cited briefs and
 quiz content already in the app. Cards are study prompts, not
@@ -33,6 +33,46 @@ FLASHCARD_DECKS = {
                 "id": "legal-system-and-methods-5",
                 "front": "Why note the dissenting opinions in a judgment?",
                 "back": "A dissent is not the law, but it shows the other side of the argument and often becomes the majority view in a later case. Noting it shows you understood the debate, not just the result.",
+            },
+            {
+                "id": "legal-system-and-methods-6",
+                "front": "What are the five sources of law in Ghana under Article 11(1)?",
+                "back": "(a) The Constitution; (b) enactments made by or under Parliament's authority; (c) Orders, Rules and Regulations made under a power conferred by the Constitution; (d) the existing law; (e) the common law.",
+            },
+            {
+                "id": "legal-system-and-methods-7",
+                "front": "Why is the Constitution listed first among the sources of law?",
+                "back": "Because it is supreme. Under Article 1(2), any law inconsistent with the Constitution is void to the extent of the inconsistency — so Parliament legislates only within the Constitution's parameters.",
+            },
+            {
+                "id": "legal-system-and-methods-8",
+                "front": "What is an enactment? (Article 295)",
+                "back": "An Act of Parliament, a Decree, a Law, a constitutional instrument or a statutory instrument, or any provision of one of those. In practice: statutes — the laws Parliament itself makes.",
+            },
+            {
+                "id": "legal-system-and-methods-9",
+                "front": "What is subsidiary legislation, and why does Parliament allow it?",
+                "back": "Orders, Rules and Regulations made by a body other than Parliament under a power the Constitution or a statute confers. Parliament cannot sit constantly or legislate every technical detail, so it delegates — but the instrument must lie before Parliament for 21 sitting days (Article 11(7)).",
+            },
+            {
+                "id": "legal-system-and-methods-10",
+                "front": "Constitutional Instrument or Legislative Instrument — which draws its power from where?",
+                "back": "A Constitutional Instrument draws its power from the Constitution; a Legislative Instrument draws its power from a statute. Both are delegated legislation.",
+            },
+            {
+                "id": "legal-system-and-methods-11",
+                "front": "What is 'the existing law'?",
+                "back": "The written and unwritten laws of Ghana as they existed immediately before the 1992 Constitution came into force on 7 January 1993 (Article 11(4)) — including laws made before that date but coming into force on or after it.",
+            },
+            {
+                "id": "legal-system-and-methods-12",
+                "front": "What does Article 11(6) require when an existing law conflicts with the Constitution?",
+                "back": "The existing law is construed with the modifications, adaptations, qualifications and exceptions necessary to bring it into conformity with the Constitution — the offending part is read down, the rest stands.",
+            },
+            {
+                "id": "legal-system-and-methods-13",
+                "front": "What is customary law under Article 11(3)?",
+                "back": "Rules of law which by custom are applicable to particular communities in Ghana. It is local to the community it comes from — it does not apply throughout Ghana.",
             },
         ],
     },

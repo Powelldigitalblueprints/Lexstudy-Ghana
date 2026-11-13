@@ -1,4 +1,4 @@
-"""Quiz bank for LexStudy Ghana v0.3.
+"""Quiz bank for LexStudy Ghana v0.3.1.
 
 Every question is tied to a principle already taught in the notes or
 in a cited brief. Answers are indices into options. Explanations are
@@ -111,6 +111,42 @@ QUIZZES = {
                 "options": ["Foreseeability, proximity and policy", "Wealth, age and location only", "The defendant's job title only", "Whether the claimant is a student"],
                 "answer": 0,
                 "explanation": "Foreseeability, proximity and policy considerations together shape whether a duty is owed to this claimant.",
+            },
+        ],
+    },
+    "legal-system-and-methods": {
+        "title": "Legal System and Methods quiz",
+        "subject": "Legal System and Methods",
+        "questions": [
+            {
+                "q": "Article 11(1) of the 1992 Constitution lists how many sources of law in Ghana?",
+                "options": ["Three", "Four", "Five", "Seven"],
+                "answer": 2,
+                "explanation": "Five: (a) the Constitution, (b) enactments made by or under Parliament's authority, (c) Orders, Rules and Regulations, (d) the existing law, and (e) the common law.",
+            },
+            {
+                "q": "Under Article 11(7), subsidiary legislation must be laid before Parliament for how long before it matures into law?",
+                "options": ["7 sitting days", "14 sitting days", "21 sitting days", "30 sitting days"],
+                "answer": 2,
+                "explanation": "21 sitting days. That scrutiny period is what turns a delegated instrument into law.",
+            },
+            {
+                "q": "What is the difference between a Constitutional Instrument and a Legislative Instrument?",
+                "options": ["A Constitutional Instrument comes from the President and a Legislative Instrument from Parliament", "A Constitutional Instrument draws its power from the Constitution; a Legislative Instrument draws its power from a statute", "A Legislative Instrument is supreme and a Constitutional Instrument is not", "There is no difference — the names are interchangeable"],
+                "answer": 1,
+                "explanation": "Both are delegated legislation, but the source of the power differs: Constitution for a C.I., statute for an L.I.",
+            },
+            {
+                "q": "What counts as 'the existing law' under Article 11(4)?",
+                "options": ["Only Acts passed after 7 January 1993", "The written and unwritten laws of Ghana as they existed immediately before the Constitution came into force", "Only customary law", "Only decisions of the Supreme Court"],
+                "answer": 1,
+                "explanation": "The law as it stood immediately before 7 January 1993 — including Acts, Decrees and statutory instruments made before that date.",
+            },
+            {
+                "q": "Under Article 11(2), the common law of Ghana comprises which three things?",
+                "options": ["The Constitution, Acts of Parliament and subsidiary legislation", "The common law, the doctrines of equity, and customary law", "Common law, civil law and religious law", "Statutes, case law and textbooks"],
+                "answer": 1,
+                "explanation": "Common law, equity and customary law — including customary law as determined by the Superior Court of Judicature.",
             },
         ],
     },
