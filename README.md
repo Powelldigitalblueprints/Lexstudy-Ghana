@@ -1,4 +1,4 @@
-# LexStudy Ghana — v0.2
+# LexStudy Ghana — v0.2.1
 
 Working name for a new, independent Ghanaian legal studies platform.
 Separate from Powell Digital Blueprints: own code, own repository,
@@ -60,11 +60,12 @@ Set SECRET_KEY in the environment for production. The local SQLite
 database file (lexstudy.db) is ignored by git and must not be
 committed.
 
-## Deploy (paused — not done in v0.2)
+## Deploy (live in a separate Render account)
 
-The v0.1 code is already in GitHub at
-Powelldigitalblueprints/Lexstudy-Ghana (public, main, v0.1 commit).
-v0.2 has NOT been pushed or deployed yet. When pushing, verify the
-file list and the health endpoint after deployment, and remember
-that Render deployment needs the PostgreSQL wiring step in
-schema.sql, since v0.2 still uses SQLite locally.
+v0.2 is live at lexstudy-ghana-zdt9.onrender.com, in a Render
+account separate from Powell's. v0.2.1 adds PostgreSQL support:
+when DATABASE_URL is set, accounts, bookmarks and attempts are
+stored in PostgreSQL and survive redeploys; without it, the app
+falls back to local SQLite. The Render service needs DATABASE_URL
+set from its own free PostgreSQL database (lexstudy-ghana-db) in
+that same account — do not point it at any Powell database.

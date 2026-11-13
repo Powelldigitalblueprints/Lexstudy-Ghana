@@ -1,10 +1,11 @@
-"""LexStudy Ghana v0.2 — accounts, verified briefs, quizzes, IRAC.
+"""LexStudy Ghana v0.2.1 — accounts, verified briefs, quizzes, IRAC.
 
 Accounts in v0.2 are for bookmarks and progress only. All content is
 currently free to browse; paid-content restrictions are NOT yet
 enforced, and no payment provider is connected. Passwords are hashed
-with Werkzeug and never stored in plain text. The database file is
-local (SQLite, see db.py) and must not be committed.
+with Werkzeug and never stored in plain text. Storage is PostgreSQL
+when DATABASE_URL is set (Render) and local SQLite otherwise
+(see db.py); the SQLite file must not be committed.
 """
 
 import os
@@ -343,7 +344,7 @@ def irac_scenario(slug):
 
 @app.route("/health")
 def health():
-    return {"status": "ok", "service": "lexstudy-ghana", "version": "0.2"}
+    return {"status": "ok", "service": "lexstudy-ghana", "version": "0.2.1"}
 
 
 @app.route("/manifest.json")
