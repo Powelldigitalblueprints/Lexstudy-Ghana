@@ -776,6 +776,8 @@ def not_found(_error):
     return render_template("404.html"), 404
 
 
+register_claude_routes(app, login_required, current_user, user_is_pro, connect)
+
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", "5000"))
     app.run(host="0.0.0.0", port=port)
