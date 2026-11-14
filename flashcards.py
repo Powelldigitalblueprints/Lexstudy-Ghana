@@ -1,4 +1,4 @@
-"""Flashcard decks for LexStudy Ghana v0.3.2.
+"""Flashcard decks for LexStudy Ghana v0.3.3.
 
 One deck per subject, seeded from the notes, cited briefs and
 quiz content already in the app. Cards are study prompts, not
@@ -73,6 +73,46 @@ FLASHCARD_DECKS = {
                 "id": "legal-system-and-methods-13",
                 "front": "What is customary law under Article 11(3)?",
                 "back": "Rules of law which by custom are applicable to particular communities in Ghana. It is local to the community it comes from — it does not apply throughout Ghana.",
+            },
+            {
+                "id": "legal-system-and-methods-14",
+                "front": "What does article 129(3) say about the Supreme Court and its own previous decisions?",
+                "back": "The Supreme Court shall, in principle, be bound to follow its own previous decisions, but may depart from a previous decision when it appears to it right to do so. All other courts are bound to follow the Supreme Court's decisions on questions of law. The Supreme Court is the only court that may depart from its own decisions.",
+            },
+            {
+                "id": "legal-system-and-methods-15",
+                "front": "What does article 136(5) require of the Court of Appeal, and what is the position between judges of the same court?",
+                "back": "The Court of Appeal shall, subject to article 129(3), be bound by its own previous decisions, and all courts lower than the Court of Appeal follow its decisions on questions of law. Judges of the same court are not bound by each other: a High Court judge is not bound by another High Court judge's decision, but will usually follow it as a matter of judicial comity.",
+            },
+            {
+                "id": "legal-system-and-methods-16",
+                "front": "Name three ways a court may avoid following a precedent that would otherwise bind it.",
+                "back": "1. The precedent has been overruled by a higher court (or the Supreme Court has departed from its own decision). 2. The precedent was given per incuriam — without considering a relevant statute, case or principle. 3. The precedent can be distinguished — the facts or legal issues in the present case are materially different, so the earlier rule does not govern.",
+            },
+            {
+                "id": "legal-system-and-methods-17",
+                "front": "Name the Superior Courts under article 126, and the lower courts listed in section 39 of the Courts Act 1993.",
+                "back": "Superior Courts: the Supreme Court, the Court of Appeal, the High Court and the Regional Tribunals. Lower courts (Courts Act, section 39): the Circuit Court, the District Court, the Juvenile Court and the Judicial Committees of the Houses of Chiefs and Traditional Councils. A superior court is presumed to have jurisdiction unless it is expressly taken away; a lower court has only the jurisdiction a statute gives it.",
+            },
+            {
+                "id": "legal-system-and-methods-18",
+                "front": "What is the Supreme Court's exclusive original jurisdiction, and what must a lower court do when a constitutional question arises before it?",
+                "back": "Under article 130(1): all matters relating to the enforcement or interpretation of the Constitution, and matters where an enactment is said to exceed the powers conferred by the Constitution. Under article 130(2), the lower court must stay its proceedings and refer the question to the Supreme Court.",
+            },
+            {
+                "id": "legal-system-and-methods-19",
+                "front": "Which courts have supervisory jurisdiction, which is invoked first, and what is the Order 55 time limit?",
+                "back": "The Supreme Court (article 132) and the High Court (article 141), concurrently; the High Court is to be invoked first (Practice Direction [1981] 1 GLR). Article 161 provides that 'supervisory jurisdiction' includes jurisdiction to issue writs or orders in the nature of habeas corpus, certiorari, mandamus, prohibition and quo warranto. An application for judicial review under Order 55 of C.I. 47 must be made not later than six months from the date of the event giving grounds for it.",
+            },
+            {
+                "id": "legal-system-and-methods-20",
+                "front": "What do articles 23 and 296 of the Constitution require?",
+                "back": "Article 23: administrative bodies and administrative officials shall act fairly and reasonably and comply with the law, and persons aggrieved by their acts may seek redress before a court or tribunal. Article 296: a person exercising a discretionary power must be fair and candid, must not act arbitrarily, capriciously or with bias, must follow due process, and — if not a judge or judicial officer — must follow regulations made by constitutional or statutory instrument. How the two articles relate is debated.",
+            },
+            {
+                "id": "legal-system-and-methods-21",
+                "front": "State the two rules of natural justice and the test for bias.",
+                "back": "Audi alteram partem — hear the other side: notice, the adverse evidence, an opportunity to respond, an oral hearing, legal representation, and the chance to question witnesses. Nemo judex in causa sua — no one may be a judge in their own cause. The test is real likelihood of bias: actual bias need not be proved, but mere suspicion is not enough. A pecuniary interest, however small, disqualifies.",
             },
         ],
     },

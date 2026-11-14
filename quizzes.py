@@ -1,4 +1,4 @@
-"""Quiz bank for LexStudy Ghana v0.3.2.
+"""Quiz bank for LexStudy Ghana v0.3.3.
 
 Every question is tied to a principle already taught in the notes or
 in a cited brief. Answers are indices into options. Explanations are
@@ -177,6 +177,36 @@ QUIZZES = {
                 "options": ["The Constitution, Acts of Parliament and subsidiary legislation", "The common law, the doctrines of equity, and customary law", "Common law, civil law and religious law", "Statutes, case law and textbooks"],
                 "answer": 1,
                 "explanation": "Common law, equity and customary law — including customary law as determined by the Superior Court of Judicature.",
+            },
+            {
+                "q": "Under article 129(3) of the 1992 Constitution, the Supreme Court treats its own previous decisions as...",
+                "options": ["Never binding on itself", "Normally binding, but it may depart from a previous decision when it appears to it right to do so", "Binding only where the earlier decision was unanimous", "Persuasive only, like the decisions of a foreign court"],
+                "answer": 1,
+                "explanation": "Article 129(3) provides that the Supreme Court shall, in principle, be bound to follow its own previous decisions, but may depart from a previous decision when it appears to it right to do so. All other courts are bound to follow the Supreme Court's decisions on questions of law.",
+            },
+            {
+                "q": "A High Court judge finds that another High Court judge decided the same point of law differently in an earlier case. The judge...",
+                "options": ["Must follow the earlier decision, because High Court judges bind each other", "Is not bound by the earlier decision, but will usually follow it as a matter of judicial comity", "Must refer the question to the Supreme Court before deciding", "Must disregard the earlier decision entirely"],
+                "answer": 1,
+                "explanation": "Judges of the same court exercise coordinate jurisdiction: a High Court judge is not bound by another High Court judge's decision, though comity usually leads judges to follow a colleague's ruling. Only the Supreme Court's decisions bind all other courts on questions of law (article 129(3)), and the Court of Appeal's bind the courts below it (article 136(5)).",
+            },
+            {
+                "q": "Under the Courts Regulations 2020 (L.I. 2429), the monetary limit for a District Court in a contract claim is...",
+                "options": ["GH₵50,000", "GH₵500,000", "GH₵2,000,000", "There is no monetary limit"],
+                "answer": 1,
+                "explanation": "L.I. 2429, in force from 16 December 2020, sets the District Court's limit at GH₵500,000 and the Circuit Court's at GH₵2,000,000 for the claim types the Regulations list, including contract claims. The High Court has no monetary limit.",
+            },
+            {
+                "q": "A member of a disciplinary panel has a small financial interest in the outcome of the hearing. Under the rule of nemo judex in causa sua...",
+                "options": ["The interest is too small to matter, so the member may sit", "The member is disqualified, because a pecuniary interest, however small, disqualifies", "The member may sit if the other panel members agree", "The member may sit unless actual bias is proved"],
+                "answer": 1,
+                "explanation": "Nemo judex is a strict rule. Actual bias need not be proved: the test is whether there is a real likelihood of bias. A pecuniary or proprietary interest, however small, disqualifies the decision-maker. Mere suspicion, without facts grounding a real likelihood, is not enough.",
+            },
+            {
+                "q": "A body has already made a decision without giving the affected person a fair hearing. The order that quashes that decision is...",
+                "options": ["Prohibition", "Mandamus", "Certiorari", "Quo warranto"],
+                "answer": 2,
+                "explanation": "Certiorari quashes a decision already made. Prohibition prevents a body from acting beyond its powers in the future; mandamus compels a public body to perform a duty; quo warranto challenges the authority by which a person holds office. An application for judicial review is made under Order 55 of C.I. 47 and must be made not later than six months from the date of the event giving grounds for it.",
             },
         ],
     },

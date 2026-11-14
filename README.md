@@ -1,11 +1,11 @@
-# LexStudy Ghana — v0.3.2
+# LexStudy Ghana — v0.3.3
 
 Working name for a new, independent Ghanaian legal studies platform.
 Separate from Powell Digital Blueprints: own code, own repository,
 own Render service and database. Nothing in this project reads or
 writes Powell data.
 
-## What v0.3.2 does
+## What v0.3.3 does
 
 - Homepage with subjects, cited briefs and practice briefs
 - Course catalogue: 8 subjects, each with topics and study notes
@@ -17,30 +17,30 @@ writes Powell data.
   - 4 practice briefs on hypothetical facts, in IRAC structure
 - Accounts: register, log in, log out, with hashed passwords
 - Bookmarks for subjects and briefs, shown on the account page
-- Quizzes: Constitutional Law (10 questions), Contract, Tort and
-  Legal System and Methods (5 questions each), with explanations;
-  scores are saved when logged in
+- Quizzes: Constitutional Law and Legal System and Methods
+  (10 questions each), Contract and Tort (5 questions each), with
+  explanations; scores are saved when logged in
 - Flashcards: one deck per subject, 5 cards each (Constitutional Law
-  and Legal System and Methods have 13 each), with Again/Good/Easy
+  has 13, Legal System and Methods has 21), with Again/Good/Easy
   grading and simple
   spaced-repetition intervals; progress is saved per account, with
   a due-today queue
 - Timed mocks: one 10-minute timed mock per quiz subject (the
-  Constitutional Law mock has 10 questions, the others 5), with a
-  countdown and auto-submit; scores are saved when logged in and
-  shown on the account page
-- IRAC trainer: 4 hypothetical scenarios; students write their own
+  Constitutional Law and Legal System and Methods mocks have 10
+  questions, the others 5), with a countdown and auto-submit;
+  scores are saved when logged in and shown on the account page
+- IRAC trainer: 5 hypothetical scenarios; students write their own
   IRAC and compare with a model answer and self-check list
 - Search across subjects, notes, cited briefs and practice briefs;
   cited briefs match on citation, court, issue, rule, facts and
   principle as well as title and subject
 - Plans page: Free / Monthly / Annual (prices to be confirmed;
-  payments are NOT connected in v0.3.2)
+  payments are NOT connected in v0.3.3)
 - Basic PWA: manifest, icon and a service worker that caches
   static assets only (not full offline notes yet)
-- Health check at `/health` (version 0.3.2)
+- Health check at `/health` (version 0.3.3)
 
-## What v0.3.2 does NOT do yet
+## What v0.3.3 does NOT do yet
 
 - Paid-content restrictions: all content is currently free to browse
 - Payment processing (Paystack / MoMo — none connected; see /pay)
@@ -81,7 +81,7 @@ PostgreSQL and survive redeploys; without it, the app falls back to
 local SQLite. The Render service needs DATABASE_URL set from its own
 free PostgreSQL database (lexstudy-ghana-db) in that same account —
 do not point it at any Powell database. The v0.3 tables are created
-automatically by CREATE TABLE IF NOT EXISTS on first run. v0.3.2
+automatically by CREATE TABLE IF NOT EXISTS on first run. v0.3.3
 adds content only (three notes entries, five quiz questions, eight
 flashcards, one IRAC scenario);
 no schema or dependency changes.

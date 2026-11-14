@@ -1,4 +1,4 @@
-"""LexStudy Ghana v0.3.2 — accounts, verified briefs, quizzes, IRAC,
+"""LexStudy Ghana v0.3.3 — accounts, verified briefs, quizzes, IRAC,
 flashcards and timed mocks.
 
 Accounts are for bookmarks and progress only. All content is
@@ -586,7 +586,7 @@ def mock_detail(slug):
 
 @app.route("/health")
 def health():
-    return {"status": "ok", "service": "lexstudy-ghana", "version": "0.3.2"}
+    return {"status": "ok", "service": "lexstudy-ghana", "version": "0.3.3"}
 
 
 @app.route("/manifest.json")
