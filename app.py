@@ -1,9 +1,11 @@
-"""LexStudy Ghana v0.3.3 — accounts, verified briefs, quizzes, IRAC,
-flashcards and timed mocks.
+"""LexStudy Ghana v0.3.4 — accounts, verified briefs, quizzes, IRAC,
+flashcards, timed mocks and the Case Library.
 
 Accounts are for bookmarks and progress only. All content is
 currently free to browse; paid-content restrictions are NOT yet
-enforced, and no payment provider is connected. Passwords are hashed
+enforced, and no payment provider is connected. The Case Library
+carries a paid gate controlled by the CASE_LIBRARY_GATE environment
+variable; it is off until payments connect (see the /library routes). Passwords are hashed
 with Werkzeug and never stored in plain text. Storage is PostgreSQL
 when DATABASE_URL is set (Render) and local SQLite otherwise
 (see db.py); the SQLite file must not be committed.
@@ -19,6 +21,7 @@ from flask import (
 )
 from werkzeug.security import check_password_hash, generate_password_hash
 
+from case_library import CASE_FILES, get_case_file
 from data import CASES, PLANS, SUBJECTS, get_case, get_subject, search as search_data
 from db import connect, init_db
 from flashcards import FLASHCARD_DECKS, all_cards, get_deck
@@ -29,6 +32,9 @@ from verified_cases import VERIFIED_CASES, get_verified_case
 
 app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "dev-only-change-me-in-production")
+# Case Library paid gate: off unless CASE_LIBRARY_GATE=on. Read from app
+# config so tests can flip it without restarting the process.
+app.config["CASE_LIBRARY_GATE"] = os.environ.get("CASE_LIBRARY_GATE", "off").lower() == "on"
 init_db()
 
 
@@ -59,6 +65,36 @@ def login_required(view):
     return wrapped
 
 
+def library_gate_on():
+    return bool(app.config.get("CASE_LIBRARY_GATE", False))
+
+
+def user_is_pro(user_id):
+    """True when the account holds a pro_access row. Rows never expire in
+    v0.3.4; expiry comes with the subscriptions/payments work."""
+    if not user_id:
+        return False
+    conn = connect()
+    try:
+        row = conn.execute(
+            "SELECT 1 FROM pro_access WHERE user_id = ?", (user_id,)
+        ).fetchone()
+        return row is not None
+    finally:
+        conn.close()
+
+
+def library_matches(case_file, q):
+    haystack = " ".join([
+        case_file["title"], case_file["citation"],
+        " ".join(case_file["other_citations"]), case_file["court"],
+        " ".join(case_file["judges"]), " ".join(case_file["topics"]),
+        case_file["subject"], case_file["facts"], case_file["holding"],
+        case_file["ratio"], case_file["significance"],
+    ]).lower()
+    return q in haystack
+
+
 def all_cases():
     return VERIFIED_CASES + CASES
 
@@ -83,7 +119,7 @@ def is_bookmarked(user_id, kind, slug):
 def home():
     return render_template(
         "index.html", subjects=SUBJECTS[:6], cases=all_cases(),
-        verified=VERIFIED_CASES, plans=PLANS,
+        verified=VERIFIED_CASES, plans=PLANS, library_count=len(CASE_FILES),
     )
 
 
@@ -151,6 +187,89 @@ def case_detail(slug):
     user = current_user()
     bookmarked = is_bookmarked(user["id"], "case", slug) if user else False
     return render_template("case.html", case=case, bookmarked=bookmarked)
+
+
+# --- Case Library ---
+
+@app.route("/library")
+def library():
+    subject_slug = request.args.get("subject", "")
+    court = request.args.get("court", "")
+    q = request.args.get("q", "").strip().lower()
+    subject = get_subject(subject_slug) if subject_slug else None
+    files = CASE_FILES
+    if subject_slug:
+        if subject:
+            files = [f for f in files if f["subject"] == subject["name"]]
+        else:
+            files = []
+    if court:
+        files = [f for f in files if court_group(f.get("court", "")) == court]
+    if q:
+        files = [f for f in files if library_matches(f, q)]
+    filtering = bool(subject_slug or court or q)
+    user = current_user()
+    gated = library_gate_on() and not (user and user_is_pro(user["id"]))
+    request_count = 0
+    if q and not files:
+        conn = connect()
+        try:
+            rows = conn.execute("SELECT case_name FROM case_requests").fetchall()
+            request_count = sum(1 for r in rows if q in r["case_name"].lower())
+        finally:
+            conn.close()
+    return render_template(
+        "library.html", files=files, subjects=SUBJECTS,
+        subject_slug=subject_slug, court=court, q=request.args.get("q", ""),
+        filtering=filtering, count=len(files), gated=gated,
+        request_count=request_count,
+    )
+
+
+@app.route("/library/<slug>")
+def library_detail(slug):
+    case_file = get_case_file(slug)
+    if case_file is None:
+        abort(404)
+    user = current_user()
+    gated = library_gate_on() and not (user and user_is_pro(user["id"]))
+    bookmarked = is_bookmarked(user["id"], "library", slug) if user else False
+    related = [get_case_file(s) for s in case_file["related_cases"]]
+    related = [r for r in related if r]
+    return render_template(
+        "library_case.html", case=case_file, gated=gated,
+        bookmarked=bookmarked, related=related,
+    )
+
+
+@app.route("/library/request", methods=["POST"])
+@login_required
+def library_request():
+    case_name = request.form.get("case_name", "").strip()
+    citation = request.form.get("citation", "").strip()
+    notes = request.form.get("notes", "").strip()
+    if not case_name:
+        flash("Please name the case you want.")
+        return redirect(url_for("library"))
+    user = current_user()
+    conn = connect()
+    try:
+        existing = conn.execute(
+            "SELECT 1 FROM case_requests WHERE user_id = ? AND LOWER(case_name) = LOWER(?)",
+            (user["id"], case_name),
+        ).fetchone()
+        if existing:
+            flash("You have already requested that case. Requested cases jump the queue.")
+        else:
+            conn.execute(
+                "INSERT INTO case_requests (user_id, case_name, citation, notes) VALUES (?, ?, ?, ?)",
+                (user["id"], case_name, citation, notes),
+            )
+            conn.commit()
+            flash("Thanks — your request is in. Requested cases jump the queue.")
+    finally:
+        conn.close()
+    return redirect(url_for("library", q=case_name))
 
 
 @app.route("/search")
@@ -277,6 +396,10 @@ def account():
             case = find_case(b["slug"])
             if case:
                 bookmark_items.append(("Case brief", case["title"], f"/cases/{b['slug']}"))
+        elif b["kind"] == "library":
+            case_file = get_case_file(b["slug"])
+            if case_file:
+                bookmark_items.append(("Case file", case_file["title"], f"/library/{b['slug']}"))
         else:
             subject = get_subject(b["slug"])
             if subject:
@@ -287,17 +410,20 @@ def account():
         scenarios=SCENARIOS, mock_attempts=mock_attempts,
         flashcard_summary=flashcard_summary,
         mocks={m["slug"]: m for m in all_mocks()},
+        gate_on=library_gate_on(), is_pro=user_is_pro(user["id"]),
     )
 
 
 @app.route("/bookmark/<kind>/<slug>", methods=["POST"])
 @login_required
 def bookmark(kind, slug):
-    if kind not in ("case", "subject"):
+    if kind not in ("case", "subject", "library"):
         abort(404)
     if kind == "case" and not find_case(slug):
         abort(404)
     if kind == "subject" and not get_subject(slug):
+        abort(404)
+    if kind == "library" and not get_case_file(slug):
         abort(404)
     user = current_user()
     conn = connect()
@@ -321,7 +447,12 @@ def bookmark(kind, slug):
         conn.commit()
     finally:
         conn.close()
-    target = f"/cases/{slug}" if kind == "case" else f"/subjects/{slug}"
+    if kind == "library":
+        target = f"/library/{slug}"
+    elif kind == "case":
+        target = f"/cases/{slug}"
+    else:
+        target = f"/subjects/{slug}"
     return redirect(target)
 
 
@@ -586,7 +717,7 @@ def mock_detail(slug):
 
 @app.route("/health")
 def health():
-    return {"status": "ok", "service": "lexstudy-ghana", "version": "0.3.3"}
+    return {"status": "ok", "service": "lexstudy-ghana", "version": "0.3.4"}
 
 
 @app.route("/manifest.json")

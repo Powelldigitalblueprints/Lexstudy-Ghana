@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+{% block title %}{{ case.title }} — Case Library — LexStudy Ghana{% endblock %}
+{% block content %}
+<p><a href="/library">← Case Library</a></p>
+<p class="badge">Case file</p>
+<h1>{{ case.title }}</h1>
+<p><strong>Subject:</strong> {{ case.subject }}</p>
+<p><strong>Citation:</strong> {{ case.citation }}</p>
+{% if case.other_citations %}<p><strong>Other citations:</strong> {{ case.other_citations | join(", ") }}</p>{% endif %}
+<p><strong>Court:</strong> {{ case.court }}</p>
+{% if case.judges %}<p><strong>Judges:</strong> {{ case.judges | join(", ") }}</p>{% endif %}
+<p><strong>Decided:</strong> {{ case.decided }}</p>
+<p><strong>Topics:</strong> {{ case.topics | join(", ") }}</p>
+{% if gated %}
+<p class="warning">The full case file is for Pro members. <a href="/plans">See plans</a> — or read the shorter version on the <a href="/cases/{{ case.slug }}">case briefs page</a>.</p>
+{% else %}
+{% if current_user %}
+<form action="/bookmark/library/{{ case.slug }}" method="post">
+  <button type="submit">{% if bookmarked %}Remove bookmark{% else %}Bookmark this case file{% endif %}</button>
+</form>
+{% else %}
+<p><a href="/login">Log in</a> to bookmark this case file.</p>
+{% endif %}
+<h2>Material facts</h2><p>{{ case.facts }}</p>
+{% if case.procedural_history %}<h2>Procedural history</h2><p>{{ case.procedural_history }}</p>{% endif %}
+<h2>Issues</h2><ul>{% for i in case.issues %}<li>{{ i }}</li>{% endfor %}</ul>
+<h2>Holding</h2><p>{{ case.holding }}</p>
+<h2>Ratio decidendi</h2><p>{{ case.ratio }}</p>
+{% if case.obiter %}<h2>Obiter dicta</h2><p>{{ case.obiter }}</p>{% endif %}
+{% if case.reasoning %}<h2>Reasoning</h2><p>{{ case.reasoning }}</p>{% endif %}
+{% if case.order %}<h2>Order made</h2><p>{{ case.order }}</p>{% endif %}
+<h2>Why it matters</h2><p>{{ case.significance }}</p>
+{% if case.legislation %}<h2>Legislation considered</h2><ul>{% for l in case.legislation %}<li>{{ l }}</li>{% endfor %}</ul>{% endif %}
+{% if case.cases_considered %}<h2>Cases considered</h2><ul>{% for c in case.cases_considered %}<li>{{ c.name }}{% if c.citation %} ({{ c.citation }}){% endif %} — {{ c.treatment }}</li>{% endfor %}</ul>{% endif %}
+{% if related %}<h2>Related case files</h2><ul>{% for r in related %}<li><a href="/library/{{ r.slug }}">{{ r.title }}</a></li>{% endfor %}</ul>{% endif %}
+{% if case.full_judgment_link %}<p><a href="{{ case.full_judgment_link }}" target="_blank" rel="noopener">{{ case.full_judgment_label }}</a></p>{% endif %}
+<h2>Sources checked for this file</h2>
+<ul>{% for s in case.sources %}<li>{{ s }}</li>{% endfor %}</ul>
+<p><em>{{ case.verification }}</em></p>
+<p><em>This file is a study summary, not the full judgment. If it conflicts with the reported judgment, the reported judgment prevails.</em></p>
+{% endif %}
+{% endblock %}

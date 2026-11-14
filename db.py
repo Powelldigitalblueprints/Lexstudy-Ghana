@@ -1,4 +1,4 @@
-"""Database storage for LexStudy Ghana v0.3.
+"""Database storage for LexStudy Ghana v0.3.4.
 
 Two backends, one interface:
 
@@ -75,6 +75,20 @@ CREATE TABLE IF NOT EXISTS mock_attempts (
     total INTEGER NOT NULL,
     created_at TEXT DEFAULT (datetime('now'))
 );
+CREATE TABLE IF NOT EXISTS pro_access (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    granted_at TEXT DEFAULT (datetime('now')),
+    UNIQUE (user_id)
+);
+CREATE TABLE IF NOT EXISTS case_requests (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    case_name TEXT NOT NULL,
+    citation TEXT NOT NULL DEFAULT '',
+    notes TEXT NOT NULL DEFAULT '',
+    created_at TEXT DEFAULT (datetime('now'))
+);
 """
 
 PG_SCHEMA = """
@@ -130,6 +144,20 @@ CREATE TABLE IF NOT EXISTS mock_attempts (
     mock_slug TEXT NOT NULL,
     score INTEGER NOT NULL,
     total INTEGER NOT NULL,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE TABLE IF NOT EXISTS pro_access (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    granted_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE (user_id)
+);
+CREATE TABLE IF NOT EXISTS case_requests (
+    id SERIAL PRIMARY KEY,
+    user_id INTEGER NOT NULL REFERENCES users(id),
+    case_name TEXT NOT NULL,
+    citation TEXT NOT NULL DEFAULT '',
+    notes TEXT NOT NULL DEFAULT '',
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 """

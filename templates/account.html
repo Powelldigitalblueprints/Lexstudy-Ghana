@@ -3,6 +3,13 @@
 {% block content %}
 <h1>My account</h1>
 <p><strong>{{ user.name }}</strong> · {{ user.email }}</p>
+{% if gate_on %}
+{% if is_pro %}
+<p><strong>Pro member.</strong> You have full access to the <a href="/library">Case Library</a>.</p>
+{% else %}
+<p>Free account. <a href="/plans">See plans</a> for full access to the <a href="/library">Case Library</a>.</p>
+{% endif %}
+{% endif %}
 <h2>Bookmarks</h2>
 {% if bookmark_items %}
 <ul>{% for kind, title, url in bookmark_items %}<li>{{ kind }}: <a href="{{ url }}">{{ title }}</a></li>{% endfor %}</ul>

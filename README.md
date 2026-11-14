@@ -1,11 +1,11 @@
-# LexStudy Ghana — v0.3.3
+# LexStudy Ghana — v0.3.4
 
 Working name for a new, independent Ghanaian legal studies platform.
 Separate from Powell Digital Blueprints: own code, own repository,
 own Render service and database. Nothing in this project reads or
 writes Powell data.
 
-## What v0.3.3 does
+## What v0.3.4 does
 
 - Homepage with subjects, cited briefs and practice briefs
 - Course catalogue: 8 subjects, each with topics and study notes
@@ -15,6 +15,14 @@ writes Powell data.
     and when); the brief index filters by subject, court and
     title/citation/principle
   - 4 practice briefs on hypothetical facts, in IRAC structure
+- Case Library: 12 full case files (same cases as the cited briefs),
+  each with material facts, procedural history, issues, holding, ratio
+  decidendi kept separate from obiter, reasoning, order made, why it
+  matters, legislation and cases considered, and sources checked;
+  searchable by name, citation, court, topic and principle, with a
+  request-a-case flow for cases not yet covered. The paid gate exists
+  (CASE_LIBRARY_GATE) but is off until payments connect; pro access
+  never expires in v0.3.4
 - Accounts: register, log in, log out, with hashed passwords
 - Bookmarks for subjects and briefs, shown on the account page
 - Quizzes: Constitutional Law and Legal System and Methods
@@ -35,14 +43,16 @@ writes Powell data.
   cited briefs match on citation, court, issue, rule, facts and
   principle as well as title and subject
 - Plans page: Free / Monthly / Annual (prices to be confirmed;
-  payments are NOT connected in v0.3.3)
+  payments are NOT connected in v0.3.4)
 - Basic PWA: manifest, icon and a service worker that caches
   static assets only (not full offline notes yet)
-- Health check at `/health` (version 0.3.3)
+- Health check at `/health` (version 0.3.4)
 
-## What v0.3.3 does NOT do yet
+## What v0.3.4 does NOT do yet
 
-- Paid-content restrictions: all content is currently free to browse
+- Paid-content restrictions: the Case Library gate exists but is
+off, so all content is currently free to browse; no UI grants pro
+access yet, and pro access never expires in v0.3.4
 - Payment processing (Paystack / MoMo — none connected; see /pay)
 - Full offline notes
 - A research database of full judgments (cited briefs here are
@@ -56,7 +66,8 @@ sources listed on each brief page. They are not reproductions of
 full judgments, and they are not a substitute for reading the
 reported judgment before citing a case in court work. If a detail
 here conflicts with the reported judgment, the reported judgment
-prevails. This site is a study aid, not legal advice.
+prevails. Case Library files are fuller study summaries with the
+same standing. This site is a study aid, not legal advice.
 
 ## Run locally
 
@@ -80,8 +91,8 @@ DATABASE_URL is set, accounts, bookmarks and attempts are stored in
 PostgreSQL and survive redeploys; without it, the app falls back to
 local SQLite. The Render service needs DATABASE_URL set from its own
 free PostgreSQL database (lexstudy-ghana-db) in that same account —
-do not point it at any Powell database. The v0.3 tables are created
-automatically by CREATE TABLE IF NOT EXISTS on first run. v0.3.3
-adds content only (three notes entries, five quiz questions, eight
-flashcards, one IRAC scenario);
-no schema or dependency changes.
+do not point it at any Powell database. Tables are created
+automatically by CREATE TABLE IF NOT EXISTS on first run. v0.3.4
+adds the Case Library (new module case_library.py, /library routes,
+pro_access and case_requests tables); the gate stays off unless
+CASE_LIBRARY_GATE=on is set in Render. No dependency changes.

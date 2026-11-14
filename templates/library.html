@@ -1,0 +1,55 @@
+{% extends "base.html" %}
+{% block title %}Case Library — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>Case Library</h1>
+<p>Full case files: material facts, procedural history, issues, the holding, the ratio decidendi kept separate from obiter dicta, the reasoning, the order made, and what to cite the case for — with the sources checked for each file.</p>
+{% if gated %}
+<p class="warning">Full case files are for Pro members. <a href="/plans">See plans</a>.</p>
+{% endif %}
+<form method="get" action="/library">
+  <label>Subject:
+    <select name="subject">
+      <option value="">All subjects</option>
+      {% for s in subjects %}
+      <option value="{{ s.slug }}" {% if s.slug == subject_slug %}selected{% endif %}>{{ s.name }}</option>
+      {% endfor %}
+    </select>
+  </label>
+  <label>Court:
+    <select name="court">
+      <option value="">All courts</option>
+      <option value="supreme" {% if court == "supreme" %}selected{% endif %}>Supreme Court</option>
+      <option value="appeal" {% if court == "appeal" %}selected{% endif %}>Court of Appeal</option>
+      <option value="high" {% if court == "high" %}selected{% endif %}>High Court</option>
+    </select>
+  </label>
+  <label>Case name, citation, court, topic or principle: <input name="q" value="{{ q }}"></label>
+  <button type="submit">Search</button>
+  {% if filtering %}<a href="/library">Clear filters</a>{% endif %}
+</form>
+<p>{{ count }} case file{% if count != 1 %}s{% endif %}{% if filtering %} matching your filters{% endif %}.</p>
+<div class="grid">
+  {% for f in files %}
+  <a class="card" href="/library/{{ f.slug }}">
+    <h3>{{ f.title }}</h3>
+    <p>{{ f.citation }} · {{ f.court }}</p>
+    <span>{{ f.subject }}{% if gated %} · Pro{% endif %}</span>
+  </a>
+  {% endfor %}
+</div>
+{% if q and count == 0 %}
+<h2>No case file yet for that search</h2>
+<p>We have not written a file for that case yet. You can read full judgments free on <a href="https://ghalii.org/" target="_blank" rel="noopener">GhaLII</a>, in its judgments section — or request the case below, and it jumps the queue.</p>
+{% if request_count %}<p>{{ request_count }} request{% if request_count != 1 %}s{% endif %} already made for a case matching this search.</p>{% endif %}
+{% if current_user %}
+<form action="/library/request" method="post">
+  <label>Case name: <input name="case_name" value="{{ q }}" required></label>
+  <label>Citation (if known): <input name="citation"></label>
+  <label>Anything else that would help us find it: <input name="notes"></label>
+  <button type="submit">Request this case</button>
+</form>
+{% else %}
+<p><a href="/login">Log in</a> to request this case.</p>
+{% endif %}
+{% endif %}
+{% endblock %}
