@@ -4,7 +4,7 @@ from datetime import date
 from flask import jsonify, render_template, request, session
 from anthropic import Anthropic
 
-MODEL = os.getenv("CLAUDE_MODEL", "claude-sonnet-4-5")
+MODEL = os.getenv("CLAUDE_MODEL", "claude-sonnet-5-5")
 DAILY_LIMIT = max(1, int(os.getenv("CLAUDE_LEGUM_DAILY_LIMIT", "25")))
 SYSTEM_PROMPT = """You are the premium AI study tutor for LexStudy Ghana, a Ghanaian legal
 studies platform. Help law students understand legal concepts, structure IRAC answers,
