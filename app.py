@@ -776,6 +776,7 @@ def not_found(_error):
     return render_template("404.html"), 404
 
 
+from claude_routes import register_claude_routes
 register_claude_routes(app, login_required, current_user, user_is_pro, connect)
 
 if __name__ == "__main__":
