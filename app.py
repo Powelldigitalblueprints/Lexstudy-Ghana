@@ -1,11 +1,12 @@
-"""LexStudy Ghana v0.3.4 — accounts, verified briefs, quizzes, IRAC,
+"""LexStudy Ghana v0.3.5 — accounts, verified briefs, quizzes, IRAC,
 flashcards, timed mocks and the Case Library.
 
 Accounts are for bookmarks and progress only. All content is
 currently free to browse; paid-content restrictions are NOT yet
 enforced, and no payment provider is connected. The Case Library
 carries a paid gate controlled by the CASE_LIBRARY_GATE environment
-variable; it is off until payments connect (see the /library routes). Passwords are hashed
+variable; it is off until payments connect (see the /library routes).
+Passwords are hashed
 with Werkzeug and never stored in plain text. Storage is PostgreSQL
 when DATABASE_URL is set (Render) and local SQLite otherwise
 (see db.py); the SQLite file must not be committed.
@@ -35,6 +36,9 @@ app.secret_key = os.environ.get("SECRET_KEY", "dev-only-change-me-in-production"
 # Case Library paid gate: off unless CASE_LIBRARY_GATE=on. Read from app
 # config so tests can flip it without restarting the process.
 app.config["CASE_LIBRARY_GATE"] = os.environ.get("CASE_LIBRARY_GATE", "off").lower() == "on"
+# Owner-only pages (e.g. /admin/requests): the account whose email
+# matches LEXSTUDY_OWNER_EMAIL. Unset means nobody is the owner.
+app.config["LEXSTUDY_OWNER_EMAIL"] = os.environ.get("LEXSTUDY_OWNER_EMAIL", "").strip().lower()
 init_db()
 
 
@@ -50,9 +54,17 @@ def current_user():
         conn.close()
 
 
+def is_owner(user):
+    """True when the signed-in account is the site owner, identified by
+    the LEXSTUDY_OWNER_EMAIL environment variable. Unset: no owner."""
+    owner_email = app.config.get("LEXSTUDY_OWNER_EMAIL", "")
+    return bool(user and owner_email and user["email"] == owner_email)
+
+
 @app.context_processor
 def inject_user():
-    return {"current_user": current_user()}
+    user = current_user()
+    return {"current_user": user, "is_owner": is_owner(user)}
 
 
 def login_required(view):
@@ -270,6 +282,40 @@ def library_request():
     finally:
         conn.close()
     return redirect(url_for("library", q=case_name))
+
+
+# --- Owner-only: case requests ---
+
+@app.route("/admin/requests")
+@login_required
+def admin_requests():
+    user = current_user()
+    if not is_owner(user):
+        flash("That page is for the site owner.")
+        return redirect(url_for("home"))
+    conn = connect()
+    try:
+        rows = conn.execute(
+            "SELECT r.case_name, r.citation, r.notes, r.created_at, u.name, u.email"
+            " FROM case_requests r JOIN users u ON u.id = r.user_id"
+            " ORDER BY r.id DESC"
+        ).fetchall()
+    finally:
+        conn.close()
+    requests = [dict(r) for r in rows]
+    # Most-requested summary: group by case-insensitive name; the name
+    # shown is the one from the earliest request received.
+    counts = {}
+    for r in reversed(requests):
+        key = r["case_name"].strip().lower()
+        entry = counts.get(key, {"name": r["case_name"].strip(), "count": 0})
+        entry["count"] += 1
+        counts[key] = entry
+    most_requested = sorted(counts.values(), key=lambda c: (-c["count"], c["name"].lower()))
+    return render_template(
+        "admin_requests.html", requests=requests,
+        most_requested=most_requested, total=len(requests),
+    )
 
 
 @app.route("/search")
@@ -717,7 +763,7 @@ def mock_detail(slug):
 
 @app.route("/health")
 def health():
-    return {"status": "ok", "service": "lexstudy-ghana", "version": "0.3.4"}
+    return {"status": "ok", "service": "lexstudy-ghana", "version": "0.3.5"}
 
 
 @app.route("/manifest.json")

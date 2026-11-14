@@ -1,11 +1,11 @@
-# LexStudy Ghana — v0.3.4
+# LexStudy Ghana — v0.3.5
 
 Working name for a new, independent Ghanaian legal studies platform.
 Separate from Powell Digital Blueprints: own code, own repository,
 own Render service and database. Nothing in this project reads or
 writes Powell data.
 
-## What v0.3.4 does
+## What v0.3.5 does
 
 - Homepage with subjects, cited briefs and practice briefs
 - Course catalogue: 8 subjects, each with topics and study notes
@@ -23,6 +23,10 @@ writes Powell data.
   request-a-case flow for cases not yet covered. The paid gate exists
   (CASE_LIBRARY_GATE) but is off until payments connect; pro access
   never expires in v0.3.4
+- Owner-only case requests view at /admin/requests: lists every
+  requested case with the requester and date, plus a most-requested
+  summary. Visible only to the account whose email matches the
+  LEXSTUDY_OWNER_EMAIL environment variable (unset: nobody can see it)
 - Accounts: register, log in, log out, with hashed passwords
 - Bookmarks for subjects and briefs, shown on the account page
 - Quizzes: Constitutional Law and Legal System and Methods
@@ -43,12 +47,12 @@ writes Powell data.
   cited briefs match on citation, court, issue, rule, facts and
   principle as well as title and subject
 - Plans page: Free / Monthly / Annual (prices to be confirmed;
-  payments are NOT connected in v0.3.4)
+  payments are NOT connected in v0.3.5)
 - Basic PWA: manifest, icon and a service worker that caches
   static assets only (not full offline notes yet)
-- Health check at `/health` (version 0.3.4)
+- Health check at `/health` (version 0.3.5)
 
-## What v0.3.4 does NOT do yet
+## What v0.3.5 does NOT do yet
 
 - Paid-content restrictions: the Case Library gate exists but is
 off, so all content is currently free to browse; no UI grants pro
@@ -95,4 +99,6 @@ do not point it at any Powell database. Tables are created
 automatically by CREATE TABLE IF NOT EXISTS on first run. v0.3.4
 adds the Case Library (new module case_library.py, /library routes,
 pro_access and case_requests tables); the gate stays off unless
-CASE_LIBRARY_GATE=on is set in Render. No dependency changes.
+CASE_LIBRARY_GATE=on is set in Render. v0.3.5 adds the owner-only
+/admin/requests view (no schema changes; set LEXSTUDY_OWNER_EMAIL in
+Render to the owner's account email to use it). No dependency changes.

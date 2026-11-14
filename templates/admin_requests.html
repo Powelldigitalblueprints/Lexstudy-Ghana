@@ -1,0 +1,20 @@
+{% extends "base.html" %}
+{% block title %}Case requests — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>Case requests</h1>
+<p>{{ total }} request{% if total != 1 %}s{% endif %} from students. Requested cases jump the queue when new case files are written.</p>
+{% if most_requested %}
+<h2>Most requested</h2>
+<ul>{% for c in most_requested %}<li>{{ c.name }} — {{ c.count }} request{% if c.count != 1 %}s{% endif %}</li>{% endfor %}</ul>
+{% endif %}
+<h2>All requests, newest first</h2>
+{% if requests %}
+<ul>
+{% for r in requests %}
+<li><strong>{{ r.case_name }}</strong>{% if r.citation %} ({{ r.citation }}){% endif %} — {{ r.name }} ({{ r.email }}) · {{ r.created_at }}{% if r.notes %}<br>Note: {{ r.notes }}{% endif %}</li>
+{% endfor %}
+</ul>
+{% else %}
+<p>No requests yet.</p>
+{% endif %}
+{% endblock %}
