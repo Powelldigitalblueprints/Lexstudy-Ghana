@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Premium AI Tutor | LexStudy Ghana{% endblock %}
+{% block content %}
+<section class="page-header">
+  <h1>Premium AI Tutor</h1>
+  {% if premium_required %}
+    <p>This feature is available to premium subscribers. Upgrade your account to use the Legum AI tutor.</p>
+    <p><a class="button" href="/plans">View plans</a></p>
+  {% elif not enabled %}
+    <p>The AI tutor is not enabled yet. Please check back later.</p>
+  {% else %}
+    <p>Ask questions about Ghanaian law, legal concepts, case analysis and IRAC. Verify authorities against the reported judgment and current legislation.</p>
+    <div id="chat-log" aria-live="polite"></div>
+    <form id="ai-form">
+      <label for="ai-message">Your question</label>
+      <textarea id="ai-message" rows="4" maxlength="5000" required placeholder="For example, explain the application of Article  Ghana's 1992 Constitution..."></textarea>
+      <button type="submit">Ask the AI tutor</button>
+    </form>
+    <p id="ai-status" role="status"></p>
+    <script>
+    (function () {
+      const form = document.getElementById("ai-form");
+      const input = document.getElementById("ai-message");
+      const log = document.getElementById("chat-log");
+      const status = document.getElementById("ai-status");
+      const history = [];
+      function add(role, content) {
+        const p = document.createElement("p");
+        const strong = document.createElement("strong");
+        strong.textContent = role === "user" ? "You: " : "AI tutor: ";
+        p.appendChild(strong);
+        p.appendChild(document.createTextNode(content));
+        log.appendChild(p);
+      }
+      form.addEventListener("submit", async function (event) {
+        event.preventDefault();
+        const message = input.value.trim();
+        if (!message) return;
+        add("user", message);
+        input.value = "";
+        status.textContent = "Preparing your answer...";
+        try {
+          const response = await fetch("/api/ai/chat", {
+            method: "POST",
+            headers: {"Content-Type": "application/json"},
+            body: JSON.stringify({message: message, history: history})
+          });
+          const data = await response.json();
+          if (!response.ok) throw new Error(data.error || "The request failed.");
+          add("assistant", data.answer);
+          history.push({role: "user", content: message}, {role: "assistant", content: data.answer});
+          if (history.length > 16) history.splice(0, history.length - 16);
+          status.textContent = "Answer received. Check legal authorities before relying on them.";
+        } catch (error) {
+          status.textContent = error.message;
+        }
+      });
+    }());
+    </script>
+  {% endif %}
+</section>
+{% endblock %}
