@@ -66,16 +66,15 @@ def register_claude_routes(app, login_required, current_user, user_is_pro, conne
                 user_id INTEGER NOT NULL, usage_date TEXT NOT NULL,
                 request_count INTEGER NOT NULL DEFAULT 0,
                 PRIMARY KEY (user_id, usage_date))""")
-            conn.execute("""INSERT INTO claude_ai_daily_usage(user_id, usage_date, request_count)
+            reserved = conn.execute("""INSERT INTO claude_ai_daily_usage(user_id, usage_date, request_count)
                 VALUES (?, ?, 1)
                 ON CONFLICT(user_id, usage_date) DO UPDATE
                 SET request_count = claude_ai_daily_usage.request_count + 1
-                WHERE claude_ai_daily_usage.request_count < ?""",
-                (user["id"], today, DAILY_LIMIT))
-            row = conn.execute("SELECT request_count FROM claude_ai_daily_usage WHERE user_id = ? AND usage_date = ?",
-                               (user["id"], today)).fetchone()
+                WHERE claude_ai_daily_usage.request_count < ?
+                RETURNING request_count""",
+                (user["id"], today, DAILY_LIMIT)).fetchone()
             conn.commit()
-            if not row or row["request_count"] > DAILY_LIMIT:
+            if not reserved:
                 return jsonify({"error": f"You have reached today's limit of {DAILY_LIMIT} AI questions."}), 429
         finally:
             conn.close()
