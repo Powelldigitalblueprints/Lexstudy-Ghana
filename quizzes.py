@@ -1,4 +1,4 @@
-"""Quiz bank for LexStudy Ghana v0.3.1.
+"""Quiz bank for LexStudy Ghana v0.3.2.
 
 Every question is tied to a principle already taught in the notes or
 in a cited brief. Answers are indices into options. Explanations are
@@ -39,6 +39,36 @@ QUIZZES = {
                 "options": ["Chapter 1", "Chapter 5", "Chapter 6", "Chapter 12"],
                 "answer": 2,
                 "explanation": "Chapter 6 contains the Directive Principles. Their justiciability has evolved in Supreme Court decisions — do not treat them as ordinary enforceable rights without checking the case law.",
+            },
+            {
+                "q": "Article 34(1) says the Directive Principles of State Policy \"shall guide\" whom?",
+                "options": ["Only Parliament and the President", "All citizens, Parliament, the President, the Judiciary, the Council of State, the Cabinet, political parties and other bodies and persons", "Only the courts", "Only political parties"],
+                "answer": 1,
+                "explanation": "Article 34(1) names them all: the Principles guide everyone who applies or interprets the Constitution or any other law, and everyone taking or implementing policy decisions, for the establishment of a just and free society.",
+            },
+            {
+                "q": "Which article of the 1992 Constitution sets out the ECONOMIC objectives of the Directive Principles of State Policy?",
+                "options": ["Article 35", "Article 36", "Article 41", "Article 34"],
+                "answer": 1,
+                "explanation": "Article 35 is political objectives, 36 economic, 37 social, 38 educational, 39 cultural, 40 international relations, 41 duties of a citizen. Article 34 is the guide clause itself.",
+            },
+            {
+                "q": "Under article 91(2), how quickly must the Council of State give advice requested by the President?",
+                "options": ["Within 7 days", "Within 14 days", "Not later than 30 days after receipt of the request", "Within 90 days"],
+                "answer": 2,
+                "explanation": "Article 91(2): the advice \"shall be given not later than thirty days after the receipt of the request from the President or other authority.\"",
+            },
+            {
+                "q": "A constitution is described as \"rigid\" when…",
+                "options": ["It can never be changed at all", "It can be changed only by a special procedure, not by an ordinary Act", "It is written in only one language", "It contains no bill of rights"],
+                "answer": 1,
+                "explanation": "Rigidity is about the amendment procedure. Ghana's Constitution can be changed only through the special procedure in Chapter 25 (articles 289-292) — entrenched provisions by referendum, others by a two-thirds majority at the second and third readings.",
+            },
+            {
+                "q": "Under section 1(2) of the Habeas Corpus Act 1964 (Act 244), who may apply for the writ?",
+                "options": ["Only the Attorney-General", "The detained person, a person entitled to custody of the detainee, or a person acting on the detainee's behalf", "Only a relative of the detainee", "Only the detainee personally"],
+                "answer": 1,
+                "explanation": "Section 1(2) names three classes of applicant: the detained person, a person entitled to custody (for example a parent), and any person acting on the detainee's behalf.",
             },
         ],
     },

@@ -1,4 +1,4 @@
-"""Flashcard decks for LexStudy Ghana v0.3.1.
+"""Flashcard decks for LexStudy Ghana v0.3.2.
 
 One deck per subject, seeded from the notes, cited briefs and
 quiz content already in the app. Cards are study prompts, not
@@ -103,6 +103,46 @@ FLASHCARD_DECKS = {
                 "id": "constitutional-law-5",
                 "front": "In NPP v Inspector-General of Police [1993-94] 2 GLR 459, what happened to the police permit regime for assemblies?",
                 "back": "The permit provisions of the Public Order Decree, 1972 were held inconsistent with the freedom of assembly in article 21(1)(d) and void. The decision shaped the Public Order Act, 1994, which uses notification rather than permission.",
+            },
+            {
+                "id": "constitutional-law-6",
+                "front": "What is a constitution, in the wider sense?",
+                "back": "The rules that determine how governmental institutions are created and operate. Every country has such rules, whether or not they sit in one document (Jennings, as presented in the source notes).",
+            },
+            {
+                "id": "constitutional-law-7",
+                "front": "Why is Ghana's 1992 Constitution called a written constitution?",
+                "back": "Its framework of government is contained in a single document, in force from 7 January 1993. An unwritten constitution, like the United Kingdom's, is spread across statutes, conventions and other documents, with Parliament supreme.",
+            },
+            {
+                "id": "constitutional-law-8",
+                "front": "What does Chapter 6 of the 1992 Constitution contain, article by article?",
+                "back": "Art 34: the guide clause. Art 35: political objectives. Art 36: economic objectives. Art 37: social objectives. Art 38: educational objectives. Art 39: cultural objectives. Art 40: international relations. Art 41: duties of a citizen.",
+            },
+            {
+                "id": "constitutional-law-9",
+                "front": "What are the two distinct questions about the Directive Principles of State Policy?",
+                "back": "(1) Can they be used as an aid to interpreting the Constitution and other laws? (2) Can a court enforce them directly? The source notes record agreement on (1) and division on (2).",
+            },
+            {
+                "id": "constitutional-law-10",
+                "front": "What duty does article 41(b) place on every citizen?",
+                "back": "To uphold and defend the Constitution and the law.",
+            },
+            {
+                "id": "constitutional-law-11",
+                "front": "What does article 89 establish, and what does article 91 require?",
+                "back": "Art 89: a Council of State to counsel the President. Art 91: it advises on appointments, within 30 days of the request; and under art 91(3) the President is not required to act in accordance with its recommendations.",
+            },
+            {
+                "id": "constitutional-law-12",
+                "front": "Give one function for each Council of State phrasing: \"in consultation with\", \"on the advice of\", \"acting in accordance with the advice of\".",
+                "back": "\"In consultation with\": art 70(1) appointments, e.g. the Auditor-General. \"On the advice of\": art 70(2) Electoral Commission appointments. \"Acting in accordance with\": art 31(1) declaration of a state of emergency.",
+            },
+            {
+                "id": "constitutional-law-13",
+                "front": "Under the Habeas Corpus Act 1964 (Act 244), who may apply for the writ, and what must the affidavit show?",
+                "back": "The detained person, a person entitled to custody, or a person acting on the detainee's behalf (s.1(2)). The affidavit must state the facts of the detention, who is detaining the person, the place of detention, and the grounds for saying the detention is unlawful.",
             },
         ],
     },
