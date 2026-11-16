@@ -1,0 +1,47 @@
+{% extends "base.html" %}
+{% block title %}Past Questions — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>Past Questions Archive</h1>
+<p>Find LLB examination papers by university, course, level, year and semester. Only reviewed records are displayed.</p>
+<form method="get" action="/past-questions">
+  <label>University
+    <select name="institution"><option value="">All universities</option>
+      {% for i in institutions %}<option value="{{ i.slug }}" {% if filters.institution == i.slug %}selected{% endif %}>{{ i.name }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Academic level
+    <select name="level"><option value="">All levels</option>
+      {% for level in levels %}<option value="{{ level }}" {% if filters.level == level %}selected{% endif %}>{{ level }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Academic year
+    <select name="year"><option value="">All years</option>
+      {% for year in years %}<option value="{{ year }}" {% if filters.year == year %}selected{% endif %}>{{ year }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Semester
+    <select name="semester"><option value="">All semesters</option>
+      {% for value in ["First Semester", "Second Semester", "Trimester", "Other"] %}<option value="{{ value }}" {% if filters.semester == value %}selected{% endif %}>{{ value }}</option>{% endfor %}
+    </select>
+  </label>
+  <label>Subject slug <input name="subject" value="{{ filters.subject }}" placeholder="e.g. constitutional-law"></label>
+  <label>Search course, code or university <input name="q" value="{{ filters.q }}"></label>
+  <button type="submit">Search archive</button>
+  <a href="/past-questions">Clear</a>
+</form>
+<p>{{ papers|length }} examination paper record(s).</p>
+{% if papers %}
+<div class="grid">
+  {% for p in papers %}
+  <a class="card" href="/past-questions/{{ p.slug }}">
+    <h3>{{ p.paper_title }}</h3>
+    <p><strong>{{ p.institution_name }}</strong></p>
+    <p>{{ p.course_code }} · {{ p.course_title }}</p>
+    <span>{{ p.academic_level }} · {{ p.academic_year }} · {{ p.semester }}</span>
+  </a>
+  {% endfor %}
+</div>
+{% else %}
+<p>No published examination papers match these filters. The archive will grow as verified records are added.</p>
+{% endif %}
+{% endblock %}
