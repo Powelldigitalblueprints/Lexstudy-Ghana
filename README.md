@@ -124,7 +124,7 @@ Run the isolated Phase 1 regression suite with:
 python -m unittest discover -s tests -v
 ```
 
-The tests create a temporary SQLite database and do not use production data.
+The tests create an isolated SQLite database. GitHub Actions also runs the same integration suite against a temporary PostgreSQL service. Neither test backend uses production data.
 
 ### Routes
 
