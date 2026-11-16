@@ -102,3 +102,36 @@ pro_access and case_requests tables); the gate stays off unless
 CASE_LIBRARY_GATE=on is set in Render. v0.3.5 adds the owner-only
 /admin/requests view (no schema changes; set LEXSTUDY_OWNER_EMAIL in
 Render to the owner's account email to use it). No dependency changes.
+
+
+## Past Questions Archive — Phase 1
+
+The Phase 1 foundation adds institution, course and examination-paper metadata
+tables for both PostgreSQL and SQLite. It adds a public searchable listing,
+paper detail pages for external links, and an owner-only administration page
+for registering institutions, LLB courses and examination records.
+
+New records remain drafts by default. Publication is restricted to external
+links with a checked source and an explicit link or distribution status.
+Hosted PDF storage is represented in the schema but is not enabled until a
+private object-storage provider is configured. No PDFs are stored in Git.
+
+### Local tests
+
+Run the isolated Phase 1 regression suite with:
+
+```bash
+python -m unittest discover -s tests -v
+```
+
+The tests create a temporary SQLite database and do not use production data.
+
+### Routes
+
+- `/past-questions` — published examination archive and filters
+- `/past-questions/<slug>` — source-linked examination record
+- `/admin/past-questions` — owner-only institution, course and paper management
+
+Set `LEXSTUDY_OWNER_EMAIL` to the site owner's registered account email to
+enable archive administration. The existing `LEXSTUDY_OWNER_EMAIL` setting
+is reused. No payment or subscription behaviour is changed.
