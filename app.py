@@ -28,6 +28,7 @@ from db import connect, init_db
 from flashcards import FLASHCARD_DECKS, all_cards, get_deck
 from irac_data import SCENARIOS, get_scenario
 from mocks import TIME_LIMIT_MINUTES, all_mocks, get_mock
+from past_questions import register_routes as register_past_question_routes
 from quizzes import QUIZZES, get_quiz
 from verified_cases import VERIFIED_CASES, get_verified_case
 
@@ -774,6 +775,9 @@ def manifest():
 @app.errorhandler(404)
 def not_found(_error):
     return render_template("404.html"), 404
+
+
+register_past_question_routes(app, connect, current_user, is_owner)
 
 
 if __name__ == "__main__":
