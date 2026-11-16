@@ -11,11 +11,15 @@ import unittest
 
 _TEST_DIR = tempfile.TemporaryDirectory(prefix="lexstudy-pq-tests-")
 os.environ["LEXSTUDY_DB"] = os.path.join(_TEST_DIR.name, "test.db")
-os.environ.pop("DATABASE_URL", None)
+if os.environ.get("LEXSTUDY_TEST_BACKEND") == "postgres":
+    os.environ["DATABASE_URL"] = os.environ["TEST_DATABASE_URL"]
+else:
+    os.environ.pop("DATABASE_URL", None)
 os.environ["LEXSTUDY_OWNER_EMAIL"] = "owner@example.test"
 
 from werkzeug.security import generate_password_hash
 import app as application
+import db as database
 
 
 class PastQuestionsPhaseOneTests(unittest.TestCase):
@@ -55,9 +59,14 @@ class PastQuestionsPhaseOneTests(unittest.TestCase):
     def test_schema_is_additive_and_contains_archive_tables(self):
         conn = application.connect()
         try:
-            names = {r["name"] for r in conn.execute(
-                "SELECT name FROM sqlite_master WHERE type = 'table'"
-            ).fetchall()}
+            if database.using_postgres():
+                names = {r["table_name"] for r in conn.execute(
+                    "SELECT table_name FROM information_schema.tables WHERE table_schema = 'public'"
+                ).fetchall()}
+            else:
+                names = {r["name"] for r in conn.execute(
+                    "SELECT name FROM sqlite_master WHERE type = 'table'"
+                ).fetchall()}
             self.assertTrue({"users", "bookmarks", "quiz_attempts", "institutions",
                              "exam_courses", "exam_papers"}.issubset(names))
         finally:
