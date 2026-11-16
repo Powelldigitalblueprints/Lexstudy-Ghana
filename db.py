@@ -82,7 +82,7 @@ CREATE TABLE IF NOT EXISTS pro_access (
     UNIQUE (user_id)
 );
 CREATE TABLE IF NOT EXISTS institutions (
-    id SERIAL PRIMARY KEY,
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
     slug TEXT UNIQUE NOT NULL,
     name TEXT NOT NULL,
     abbreviation TEXT NOT NULL DEFAULT '',
