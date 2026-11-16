@@ -81,6 +81,56 @@ CREATE TABLE IF NOT EXISTS pro_access (
     granted_at TEXT DEFAULT (datetime('now')),
     UNIQUE (user_id)
 );
+CREATE TABLE IF NOT EXISTS institutions (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    slug TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    abbreviation TEXT NOT NULL DEFAULT '',
+    website_url TEXT NOT NULL DEFAULT '',
+    is_active INTEGER NOT NULL DEFAULT 1,
+    created_at TEXT DEFAULT (datetime('now'))
+);
+CREATE TABLE IF NOT EXISTS exam_courses (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    institution_id INTEGER NOT NULL REFERENCES institutions(id),
+    course_code TEXT NOT NULL,
+    course_title TEXT NOT NULL,
+    subject_slug TEXT NOT NULL DEFAULT '',
+    subject_name TEXT NOT NULL DEFAULT '',
+    academic_level TEXT NOT NULL,
+    programme TEXT NOT NULL DEFAULT 'LLB',
+    created_at TEXT DEFAULT (datetime('now')),
+    UNIQUE (institution_id, course_code)
+);
+CREATE TABLE IF NOT EXISTS exam_papers (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    slug TEXT UNIQUE NOT NULL,
+    course_id INTEGER NOT NULL REFERENCES exam_courses(id),
+    academic_year TEXT NOT NULL,
+    semester TEXT NOT NULL,
+    examination_type TEXT NOT NULL,
+    examination_date TEXT NOT NULL DEFAULT '',
+    paper_title TEXT NOT NULL,
+    access_mode TEXT NOT NULL DEFAULT 'external',
+    storage_provider TEXT NOT NULL DEFAULT '',
+    storage_key TEXT NOT NULL DEFAULT '',
+    source_url TEXT NOT NULL DEFAULT '',
+    source_attribution TEXT NOT NULL DEFAULT '',
+    verification_status TEXT NOT NULL DEFAULT 'unverified',
+    rights_status TEXT NOT NULL DEFAULT 'pending',
+    publication_status TEXT NOT NULL DEFAULT 'draft',
+    allow_download INTEGER NOT NULL DEFAULT 0,
+    verification_notes TEXT NOT NULL DEFAULT '',
+    uploaded_by INTEGER REFERENCES users(id),
+    verified_by INTEGER REFERENCES users(id),
+    verified_at TEXT,
+    created_at TEXT DEFAULT (datetime('now')),
+    updated_at TEXT DEFAULT (datetime('now'))
+);
+CREATE INDEX IF NOT EXISTS idx_exam_courses_institution ON exam_courses(institution_id);
+CREATE INDEX IF NOT EXISTS idx_exam_papers_course ON exam_papers(course_id);
+CREATE INDEX IF NOT EXISTS idx_exam_papers_publication ON exam_papers(publication_status);
+CREATE INDEX IF NOT EXISTS idx_exam_papers_year ON exam_papers(academic_year);
 CREATE TABLE IF NOT EXISTS case_requests (
     id INTEGER PRIMARY KEY AUTOINCREMENT,
     user_id INTEGER NOT NULL REFERENCES users(id),
@@ -152,6 +202,56 @@ CREATE TABLE IF NOT EXISTS pro_access (
     granted_at TIMESTAMPTZ DEFAULT NOW(),
     UNIQUE (user_id)
 );
+CREATE TABLE IF NOT EXISTS institutions (
+    id SERIAL PRIMARY KEY,
+    slug TEXT UNIQUE NOT NULL,
+    name TEXT NOT NULL,
+    abbreviation TEXT NOT NULL DEFAULT '',
+    website_url TEXT NOT NULL DEFAULT '',
+    is_active INTEGER NOT NULL DEFAULT 1,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE TABLE IF NOT EXISTS exam_courses (
+    id SERIAL PRIMARY KEY,
+    institution_id INTEGER NOT NULL REFERENCES institutions(id),
+    course_code TEXT NOT NULL,
+    course_title TEXT NOT NULL,
+    subject_slug TEXT NOT NULL DEFAULT '',
+    subject_name TEXT NOT NULL DEFAULT '',
+    academic_level TEXT NOT NULL,
+    programme TEXT NOT NULL DEFAULT 'LLB',
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    UNIQUE (institution_id, course_code)
+);
+CREATE TABLE IF NOT EXISTS exam_papers (
+    id SERIAL PRIMARY KEY,
+    slug TEXT UNIQUE NOT NULL,
+    course_id INTEGER NOT NULL REFERENCES exam_courses(id),
+    academic_year TEXT NOT NULL,
+    semester TEXT NOT NULL,
+    examination_type TEXT NOT NULL,
+    examination_date TEXT NOT NULL DEFAULT '',
+    paper_title TEXT NOT NULL,
+    access_mode TEXT NOT NULL DEFAULT 'external',
+    storage_provider TEXT NOT NULL DEFAULT '',
+    storage_key TEXT NOT NULL DEFAULT '',
+    source_url TEXT NOT NULL DEFAULT '',
+    source_attribution TEXT NOT NULL DEFAULT '',
+    verification_status TEXT NOT NULL DEFAULT 'unverified',
+    rights_status TEXT NOT NULL DEFAULT 'pending',
+    publication_status TEXT NOT NULL DEFAULT 'draft',
+    allow_download INTEGER NOT NULL DEFAULT 0,
+    verification_notes TEXT NOT NULL DEFAULT '',
+    uploaded_by INTEGER REFERENCES users(id),
+    verified_by INTEGER REFERENCES users(id),
+    verified_at TEXT,
+    created_at TIMESTAMPTZ DEFAULT NOW(),
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_exam_courses_institution ON exam_courses(institution_id);
+CREATE INDEX IF NOT EXISTS idx_exam_papers_course ON exam_papers(course_id);
+CREATE INDEX IF NOT EXISTS idx_exam_papers_publication ON exam_papers(publication_status);
+CREATE INDEX IF NOT EXISTS idx_exam_papers_year ON exam_papers(academic_year);
 CREATE TABLE IF NOT EXISTS case_requests (
     id SERIAL PRIMARY KEY,
     user_id INTEGER NOT NULL REFERENCES users(id),

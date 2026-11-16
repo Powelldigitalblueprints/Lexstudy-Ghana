@@ -1,0 +1,16 @@
+{% extends "base.html" %}
+{% block title %}{{ paper.paper_title }} — Past Questions{% endblock %}
+{% block content %}
+<p><a href="/past-questions">← Past Questions Archive</a></p>
+<h1>{{ paper.paper_title }}</h1>
+<p><strong>University:</strong> {{ paper.institution_name }}</p>
+<p><strong>Course:</strong> {{ paper.course_code }} · {{ paper.course_title }}</p>
+<p><strong>Level:</strong> {{ paper.academic_level }}</p>
+<p><strong>Academic year:</strong> {{ paper.academic_year }}</p>
+<p><strong>Semester:</strong> {{ paper.semester }}</p>
+<p><strong>Examination:</strong> {{ paper.examination_type }}</p>
+{% if paper.examination_date %}<p><strong>Date:</strong> {{ paper.examination_date }}</p>{% endif %}
+{% if paper.source_attribution %}<p><strong>Source:</strong> {{ paper.source_attribution }}</p>{% endif %}
+<p>This examination paper is hosted by its original source. LexStudy provides this record and links to the source.</p>
+<p><a class="btn" href="{{ paper.source_url }}" target="_blank" rel="noopener noreferrer">Open original examination paper</a></p>
+{% endblock %}

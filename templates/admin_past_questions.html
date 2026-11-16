@@ -1,0 +1,93 @@
+{% extends "base.html" %}
+{% block title %}Manage Past Questions — LexStudy Ghana{% endblock %}
+{% block content %}
+<h1>Past Questions Administration</h1>
+<p>Only the configured site owner can manage archive records. New records are saved as drafts. Publication requires source verification and a confirmed basis for linking or distribution.</p>
+<h2>Add institution</h2>
+<form method="post">
+  <input type="hidden" name="_csrf_token" value="{{ pq_csrf_token }}">
+  <input type="hidden" name="action" value="institution">
+  <label>Institution name <input name="name" required></label>
+  <label>Abbreviation <input name="abbreviation"></label>
+  <label>Slug (optional) <input name="slug"></label>
+  <label>Website URL <input name="website_url" type="url"></label>
+  <button type="submit">Add institution</button>
+</form>
+<h2>Institutions</h2>
+<ul>{% for i in institutions %}<li>{{ i.name }}{% if i.abbreviation %} ({{ i.abbreviation }}){% endif %} · {{ i.slug }}</li>{% else %}<li>No institutions registered.</li>{% endfor %}</ul>
+<hr>
+<h2>Add LLB course</h2>
+<form method="post">
+  <input type="hidden" name="_csrf_token" value="{{ pq_csrf_token }}">
+  <input type="hidden" name="action" value="course">
+  <label>University
+    <select name="institution_id" required>{% for i in institutions %}<option value="{{ i.id }}">{{ i.name }}</option>{% endfor %}</select>
+  </label>
+  <label>Course code <input name="course_code" required></label>
+  <label>Course title <input name="course_title" required></label>
+  <label>Academic level
+    <select name="academic_level"><option>Level 100</option><option>Level 200</option><option>Level 300</option><option>Level 400</option></select>
+  </label>
+  <label>Subject name <input name="subject_name"></label>
+  <label>Subject slug <input name="subject_slug" placeholder="e.g. constitutional-law"></label>
+  <label>Programme <input name="programme" value="LLB"></label>
+  <button type="submit">Add course</button>
+</form>
+<h2>Registered courses</h2>
+<ul>{% for c in courses %}<li>{{ c.institution_name }} · {{ c.course_code }} · {{ c.course_title }} · {{ c.academic_level }}</li>{% else %}<li>No courses registered.</li>{% endfor %}</ul>
+<hr>
+<h2>Add examination paper record</h2>
+<form method="post">
+  <input type="hidden" name="_csrf_token" value="{{ pq_csrf_token }}">
+  <input type="hidden" name="action" value="paper">
+  <label>Course
+    <select name="course_id" required>{% for c in courses %}<option value="{{ c.id }}">{{ c.institution_name }} · {{ c.course_code }} · {{ c.course_title }}</option>{% endfor %}</select>
+  </label>
+  <label>Paper title <input name="paper_title" required></label>
+  <label>Academic year <input name="academic_year" placeholder="2025/2026" pattern="[0-9]{4}/[0-9]{4}" required></label>
+  <label>Semester
+    <select name="semester"><option>First Semester</option><option>Second Semester</option><option>Trimester</option><option>Other</option></select>
+  </label>
+  <label>Examination type
+    <select name="examination_type"><option>End-of-semester</option><option>Mid-semester</option><option>Resit</option><option>Supplementary</option><option>Other</option></select>
+  </label>
+  <label>Access method
+    <select name="access_mode"><option value="external">External link</option><option value="hosted" disabled>Hosted PDF (storage integration pending)</option></select>
+  </label>
+  <label>Original source URL <input name="source_url" type="url" required></label>
+  <label>Source attribution <input name="source_attribution" placeholder="University or authorised source"></label>
+  <label>Source verification
+    <select name="verification_status"><option value="unverified">Unverified</option><option value="source_checked">Source checked</option><option value="institution_confirmed">Institution confirmed</option></select>
+  </label>
+  <label>Rights status
+    <select name="rights_status"><option value="pending">Pending review</option><option value="link_only">Link only</option><option value="permission_granted">Permission granted</option><option value="open_licence">Open licence</option><option value="restricted">Restricted</option></select>
+  </label>
+  <label>Verification notes <textarea name="verification_notes"></textarea></label>
+  <button type="submit">Save as draft</button>
+</form>
+<h2>Examination records</h2>
+{% for p in papers %}
+<article class="note">
+  <strong>{{ p.paper_title }}</strong>
+  <p>{{ p.institution_name }} · {{ p.course_code }} · {{ p.academic_year }} · {{ p.semester }}</p>
+  <p>Status: {{ p.publication_status }} · Source: {{ p.verification_status }} · Rights: {{ p.rights_status }}</p>
+  {% if p.publication_status != "published" %}
+  <form method="post">
+    <input type="hidden" name="_csrf_token" value="{{ pq_csrf_token }}">
+    <input type="hidden" name="action" value="publish">
+    <input type="hidden" name="paper_id" value="{{ p.id }}">
+    <button type="submit">Publish if eligible</button>
+  </form>
+  {% else %}
+  <form method="post">
+    <input type="hidden" name="_csrf_token" value="{{ pq_csrf_token }}">
+    <input type="hidden" name="action" value="withdraw">
+    <input type="hidden" name="paper_id" value="{{ p.id }}">
+    <button type="submit">Withdraw</button>
+  </form>
+  {% endif %}
+</article>
+{% else %}
+<p>No examination records have been added.</p>
+{% endfor %}
+{% endblock %}
