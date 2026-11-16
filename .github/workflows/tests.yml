@@ -12,6 +12,20 @@ on:
 jobs:
   tests:
     runs-on: ubuntu-latest
+    services:
+      postgres:
+        image: postgres:16
+        env:
+          POSTGRES_USER: lexstudy_test
+          POSTGRES_PASSWORD: lexstudy_test
+          POSTGRES_DB: lexstudy_test
+        ports:
+          - 5432:5432
+        options: >-
+          --health-cmd "pg_isready -U lexstudy_test -d lexstudy_test"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
     steps:
       - uses: actions/checkout@v4
       - uses: actions/setup-python@v5
@@ -19,5 +33,32 @@ jobs:
           python-version: "3.12"
       - name: Install dependencies
         run: pip install -r requirements.txt
-      - name: Run test suite
+      - name: Run SQLite regression suite
         run: python -m unittest discover -s tests -v
+      - name: Validate PostgreSQL schema in isolated CI database
+        env:
+          TEST_DATABASE_URL: postgresql://lexstudy_test:lexstudy_test@localhost:5432/lexstudy_test
+        run: |
+          python - <<'PY'
+          import os
+          import psycopg2
+          from db import PG_SCHEMA
+
+          connection = psycopg2.connect(os.environ["TEST_DATABASE_URL"])
+          try:
+              with connection.cursor() as cursor:
+                  cursor.execute(PG_SCHEMA)
+                  cursor.execute(
+                      "SELECT table_name FROM information_schema.tables "
+                      "WHERE table_schema = 'public'"
+                  )
+                  tables = {row[0] for row in cursor.fetchall()}
+              required = {"institutions", "exam_courses", "exam_papers", "users"}
+              missing = required - tables
+              if missing:
+                  raise SystemExit("Missing PostgreSQL tables: " + ", ".join(sorted(missing)))
+              connection.commit()
+              print("PostgreSQL archive schema validation passed.")
+          finally:
+              connection.close()
+          PY
