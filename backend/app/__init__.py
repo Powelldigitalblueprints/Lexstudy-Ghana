@@ -10,12 +10,11 @@ from .security import csrf_protect
 
 def create_app(config_object=None):
     app = Flask(__name__)
+    app.config.from_object(Config)
 
-    if config_object is None:
-        app.config.from_object(Config)
-    elif isinstance(config_object, dict):
+    if isinstance(config_object, dict):
         app.config.update(config_object)
-    else:
+    elif config_object is not None:
         app.config.from_object(config_object)
 
     if app.config.get("TESTING"):

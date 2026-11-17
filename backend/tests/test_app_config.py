@@ -12,12 +12,11 @@ def test_application_refuses_to_start_without_secret_key():
         })
 
 
-def test_session_cookie_security_defaults_to_explicit_secure_setting():
+def test_session_cookie_security_defaults_are_applied():
     app = create_app({
         "TESTING": True,
         "SECRET_KEY": "test-secret",
         "SQLALCHEMY_DATABASE_URI": "sqlite://",
-        "SESSION_COOKIE_SECURE": True,
     })
     assert app.config["SESSION_COOKIE_HTTPONLY"] is True
     assert app.config["SESSION_COOKIE_SECURE"] is True
@@ -29,3 +28,8 @@ def test_api_sets_basic_security_headers(client):
     assert response.headers["X-Content-Type-Options"] == "nosniff"
     assert response.headers["X-Frame-Options"] == "DENY"
     assert response.headers["Referrer-Policy"] == "strict-origin-when-cross-origin"
+
+
+def test_auth_responses_are_not_cached(client):
+    response = client.get("/api/v1/auth/csrf")
+    assert response.headers["Cache-Control"] == "no-store"
