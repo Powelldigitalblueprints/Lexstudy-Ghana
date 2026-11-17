@@ -1,4 +1,4 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from werkzeug.exceptions import HTTPException
 
 from .config import Config
@@ -35,6 +35,8 @@ def create_app(config_object=None):
         response.headers.setdefault("X-Frame-Options", "DENY")
         response.headers.setdefault("Referrer-Policy", "strict-origin-when-cross-origin")
         response.headers.setdefault("Permissions-Policy", "camera=(), microphone=(), geolocation=()")
+        if request.path.startswith("/api/v1/auth/"):
+            response.headers["Cache-Control"] = "no-store"
         return response
 
     @app.errorhandler(HTTPException)
