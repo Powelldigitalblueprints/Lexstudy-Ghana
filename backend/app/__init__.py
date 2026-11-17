@@ -7,7 +7,13 @@ from .routes.health import health_bp
 
 def create_app(config_object=None):
     app = Flask(__name__)
-    app.config.from_object(config_object or Config)
+
+    if config_object is None:
+        app.config.from_object(Config)
+    elif isinstance(config_object, dict):
+        app.config.update(config_object)
+    else:
+        app.config.from_object(config_object)
 
     if app.config.get("TESTING"):
         app.config["SECRET_KEY"] = app.config.get("SECRET_KEY") or "test-only-secret"

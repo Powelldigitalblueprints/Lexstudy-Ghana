@@ -4,3 +4,8 @@ __pycache__/
 .env
 *.db
 lexstudy.db
+node_modules/
+frontend/dist/
+frontend/.vite/
+backend/.pytest_cache/
+backend/instance/
